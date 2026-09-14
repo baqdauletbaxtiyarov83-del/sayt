@@ -1,374 +1,444 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="uz">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FitLife - Sog'lom Hayot Platformasi</title>
-  <link rel="stylesheet" href="./style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitLife — Sog'lom Hayot Tarzi Platformasi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
 
-  <!-- HEADER / NAVIGATION -->
   <header class="header">
     <div class="container header-container">
-      <a href="#" class="logo nav-link" data-target="home">
+      <a href="#" class="logo" onclick="switchTab('home')">
         <i class="fa-solid fa-bolt logo-icon"></i>
         <span>FitLife</span>
       </a>
 
-      <nav class="desktop-nav">
-        <ul>
-          <li><a href="#" class="nav-link active" data-target="home">Bosh sahifa</a></li>
-          <li><a href="#" class="nav-link" data-target="programs">Dasturlar</a></li>
-          <li><a href="#" class="nav-link" data-target="trainers">MurabbSpace</a></li>
-          <li><a href="#" class="nav-link" data-target="blog">Blog</a></li>
-          <li><a href="#" class="nav-link" data-target="contact">Bog'lanish</a></li>
-        </ul>
+      <nav class="nav-links">
+        <a href="#" class="nav-link active" data-target="home">Bosh sahifa</a>
+        <a href="#" class="nav-link" data-target="programs">Dasturlar</a>
+        <a href="#" class="nav-link" data-target="trainers">Murabbiylar</a>
+        <a href="#" class="nav-link" data-target="blog">Blog</a>
+        <a href="#" class="nav-link" data-target="contact">Bog'lanish</a>
       </nav>
 
       <div class="header-actions">
-        <button class="icon-btn search-toggle"><i class="fa-solid fa-magnifying-glass"></i></button>
-        
+        <button class="icon-btn" title="Qidiruv"><i class="fa-solid fa-magnifying-glass"></i></button>
         <div class="lang-dropdown">
-          <button class="lang-btn" id="langBtn"><span id="currentLang">UZ</span> <i class="fa-solid fa-chevron-down"></i></button>
-          <div class="dropdown-menu" id="langMenu">
-            <a href="#" data-lang="UZ">UZ</a>
-            <a href="#" data-lang="RU">RU</a>
-            <a href="#" data-lang="EN">EN</a>
-          </div>
+          <button class="lang-btn"><i class="fa-solid fa-globe"></i> <span>UZ</span> <i class="fa-solid fa-chevron-down"></i></button>
         </div>
-
-        <button class="btn btn-primary login-btn">Kirish</button>
-        <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fa-solid fa-bars"></i></button>
+        <button class="btn btn-primary btn-login">Kirish</button>
+        <button class="mobile-toggle" id="mobileToggle"><i class="fa-solid fa-bars"></i></button>
       </div>
     </div>
   </header>
 
-  <!-- MOBILE SIDE DRAWER -->
-  <div class="mobile-drawer-overlay" id="drawerOverlay"></div>
-  <div class="mobile-drawer" id="mobileDrawer">
-    <div class="drawer-header">
-      <a href="#" class="logo nav-link" data-target="home">
-        <i class="fa-solid fa-bolt logo-icon"></i>
-        <span>FitLife</span>
-      </a>
-      <button class="close-drawer" id="closeDrawer"><i class="fa-solid fa-xmark"></i></button>
+  <div class="mobile-menu-overlay" id="mobileOverlay"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <a href="#" class="logo"><i class="fa-solid fa-bolt logo-icon"></i> FitLife</a>
+      <button class="close-btn" id="closeMenu"><i class="fa-solid fa-xmark"></i></button>
     </div>
-
-    <div class="drawer-search">
+    <div class="mobile-search">
       <i class="fa-solid fa-magnifying-glass"></i>
       <input type="text" placeholder="Qidirish...">
     </div>
-
-    <ul class="drawer-nav">
-      <li><a href="#" class="drawer-link nav-link active" data-target="home">Bosh sahifa</a></li>
-      <li><a href="#" class="drawer-link nav-link" data-target="programs">Dasturlar</a></li>
-      <li><a href="#" class="drawer-link nav-link" data-target="trainers">MurabbSpace</a></li>
-      <li><a href="#" class="drawer-link nav-link" data-target="blog">Blog</a></li>
-      <li><a href="#" class="drawer-link nav-link" data-target="contact">Bog'lanish</a></li>
+    <ul class="mobile-nav-list">
+      <li><a href="#" class="mobile-nav-link active" data-target="home">Bosh sahifa</a></li>
+      <li><a href="#" class="mobile-nav-link" data-target="programs">Dasturlar</a></li>
+      <li><a href="#" class="mobile-nav-link" data-target="trainers">Murabbiylar</a></li>
+      <li><a href="#" class="mobile-nav-link" data-target="blog">Blog</a></li>
+      <li><a href="#" class="mobile-nav-link" data-target="contact">Bog'lanish</a></li>
     </ul>
-
-    <div class="drawer-footer">
-      <div class="drawer-lang">
-        <button class="drawer-lang-btn active" data-lang="UZ">UZ</button>
-        <button class="drawer-lang-btn" data-lang="RU">RU</button>
+    <div class="mobile-menu-footer">
+      <div class="lang-switch">
+        <button class="active">UZ</button>
+        <button>RU</button>
       </div>
       <button class="btn btn-primary full-width">Kirish</button>
     </div>
   </div>
 
-  <!-- MAIN CONTENT CONTAINER -->
-  <main id="main-content">
-
-    <!-- HOME SECTION -->
+  <main>
     <section id="home" class="page-section active">
+      
       <div class="container hero-container">
         <div class="hero-content">
-          <div class="badge-pill">
-            <i class="fa-solid fa-location-dot"></i> O'zbekistondagi #1 Fitness Platforma
+          <div class="badge"><i class="fa-solid fa-trophy"></i> O'zbekistondagi #1 Fitness Platforma</div>
+          <h1 class="hero-title">Yangi hayot. <span class="text-blue">Yangi sen.</span></h1>
+          <p class="hero-description">
+            FitLife bilan professional murabbiylar va ilmiy asoslangan dasturlar yordamida maqsadlaringizga erishing. Sog'lom hayot — bu sizning tanlovingiz.
+          </p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary btn-lg" onclick="switchTab('programs')"><i class="fa-solid fa-play"></i> Hozir Boshlash</button>
+            <button class="btn btn-outline btn-lg" onclick="switchTab('trainers')">Murabbiylarni Ko'rish</button>
           </div>
-          <h1 class="hero-title">Yangi hayot. <span class="highlight">Yangi sen.</span></h1>
-          <p class="hero-desc">FitLife bilan professional murabbiylar va ilmiy asoslangan dasturlar yordamida maqsadlaringizga erishing. Sog'lom hayot — bu tanlov, sizning tanlovingiz.</p>
-          <div class="hero-btns">
-            <button class="btn btn-primary nav-link" data-target="programs"><i class="fa-solid fa-play"></i> Hozir Boshlash</button>
-            <button class="btn btn-outline nav-link" data-target="trainers">Murabbiylarni Ko'rish</button>
-          </div>
-          <div class="hero-stats-row">
-            <div class="avatar-group">
-              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100" alt="user">
-              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100" alt="user">
-              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100" alt="user">
+          <div class="hero-stats">
+            <div class="avatars-group">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100" alt="User 1">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" alt="User 2">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100" alt="User 3">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100" alt="User 4">
             </div>
-            <div class="stats-text">
-              <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-              <p>5,000+ faol foydalanuvchi</p>
+            <div class="rating-info">
+              <div class="stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <span><strong>5,000+</strong> faol foydalanuvchi</span>
             </div>
           </div>
         </div>
 
         <div class="hero-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=800" alt="Fitness" class="hero-img">
-          
-          <div class="floating-card card-top">
-            <div class="card-icon flame"><i class="fa-solid fa-fire"></i></div>
+          <div class="card-float card-top">
+            <div class="icon-circle bg-blue"><i class="fa-solid fa-fire"></i></div>
             <div>
-              <strong>480 kcal</strong>
-              <span>Bugungi mashg'ulot</span>
+              <h4>480 kcal</h4>
+              <p>Bugungi mashg'ulot</p>
             </div>
           </div>
-
-          <div class="floating-card card-bottom">
-            <div class="card-icon check"><i class="fa-solid fa-check"></i></div>
+          <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800" alt="FitLife Hero" class="hero-img">
+          <div class="card-float card-bottom">
+            <div class="icon-circle bg-green"><i class="fa-solid fa-chart-line"></i></div>
             <div>
-              <strong>95% Natija</strong>
-              <span>Muvaffaqiyat darajasi</span>
+              <h4>95% Natija</h4>
+              <p>Muvaffaqiyat darajasi</p>
             </div>
           </div>
         </div>
       </div>
+
+      <section class="features-section">
+        <div class="container">
+          <div class="section-title-center">
+            <h2>Nima uchun <span>FitLife</span> platformasini tanlashadi?</h2>
+            <p>Sog'lom turmush tarziga erishishingiz uchun barcha qulayliklar bitta joyda</p>
+          </div>
+          <div class="features-grid">
+            <div class="feature-card">
+              <div class="feature-icon"><i class="fa-solid fa-person-running"></i></div>
+              <h3>Shaxsiy Dasturlar</h3>
+              <p>Har bir foydalanuvchining jismoniy holatiga moslashtirilgan mashg'ulot Rejalari.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon"><i class="fa-solid fa-user-ninja"></i></div>
+              <h3>Top Murabbiylar</h3>
+              <p>Xalqaro sertifikatga ega va ko'p yillik tajribali mutaxassislar nazorati.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon"><i class="fa-solid fa-apple-whole"></i></div>
+              <h3>To'g'ri Ovqatlanish</h3>
+              <p>Kunlik ratsioningizga moslashtirilgan balanslashtirilgan menyu rejalari.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+              <h3>Istalgan Joyda Mashq</h3>
+              <p>Uyda, zalda yoki ochiq havoda mashg'ulotlarni bajaring va kuzatib boring.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="categories-section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Mashg'ulot <span>Yo'nalishlari</span></h2>
+            <p class="sub-text">O'zingizga maqbul bo'lgan yo'nalish bo'yicha shug'ullanishni boshlang</p>
+          </div>
+          <div class="categories-grid">
+            <div class="category-card" onclick="switchTab('programs')">
+              <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=500" alt="Kuch mashqlari">
+              <div class="category-overlay">
+                <h3>Kuch va Mushak</h3>
+                <p>15+ Dasturlar</p>
+              </div>
+            </div>
+            <div class="category-card" onclick="switchTab('programs')">
+              <img src="https://images.unsplash.com/photo-1538805060514-97d9cc17730c?w=500" alt="Kardio">
+              <div class="category-overlay">
+                <h3>Kardio & Yog' Yoqish</h3>
+                <p>20+ Dasturlar</p>
+              </div>
+            </div>
+            <div class="category-card" onclick="switchTab('programs')">
+              <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=500" alt="Yoga">
+              <div class="category-overlay">
+                <h3>Yoga va Meditatsiya</h3>
+                <p>12+ Dasturlar</p>
+              </div>
+            </div>
+            <div class="category-card" onclick="switchTab('programs')">
+              <img src="https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?w=500" alt="HIIT">
+              <div class="category-overlay">
+                <h3>HIIT Intensiv</h3>
+                <p>18+ Dasturlar</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats-counter-section">
+        <div class="container stats-counter-grid">
+          <div class="stat-box">
+            <h2>15,000+</h2>
+            <p>Tamomlangan Mashg'ulotlar</p>
+          </div>
+          <div class="stat-box">
+            <h2>98%</h2>
+            <p>A'zolarning Mamnunligi</p>
+          </div>
+          <div class="stat-box">
+            <h2>35+</h2>
+            <p>Professional Murabbiylar</p>
+          </div>
+          <div class="stat-box">
+            <h2>50,000 kg</h2>
+            <p>Yoqilgan Umumiy Yog' Miqdori</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="testimonials-section">
+        <div class="container">
+          <div class="section-title-center">
+            <h2>A'zolarimiz nima deydi?</h2>
+            <p>FitLife bilan real natijalarga erishgan insonlarning tajribasi</p>
+          </div>
+          <div class="testimonials-grid">
+            <div class="testimonial-card">
+              <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <p class="review-text">"3 oy ichida 12 kg vazn yoqotdim! Dasturlar juda tushunarli va professional yondashilgan. Rahmat FitLife jamoasiga!"</p>
+              <div class="user-profile">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100" alt="Sardor">
+                <div>
+                  <h5>Sardor Rahimov</h5>
+                  <small>Tadbirkor</small>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <p class="review-text">"Uy sharoitida shug'ullanish uchun eng zo'r platforma. Shaxsiy murabbiyim har kuni nazorat qilib turadi."</p>
+              <div class="user-profile">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100" alt="Madina">
+                <div>
+                  <h5>Madina Axmedova</h5>
+                  <small>Dizayner</small>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <p class="review-text">"Yoga dasturi orqali surunkali bel og'riqlaridan xalos bo'ldim. Har kuni yangi quvvat va energiya olaman."</p>
+              <div class="user-profile">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" alt="Bekzod">
+                <div>
+                  <h5>Bekzod Olimov</h5>
+                  <small>Dasturchi</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="pricing-section">
+        <div class="container">
+          <div class="section-title-center">
+            <h2>Hamyonbop <span>Tariflar</span></h2>
+            <p>O'zingizga mos tarif rejasini tanlang</p>
+          </div>
+          <div class="pricing-grid">
+            <div class="pricing-card">
+              <h3>Boshlang'ich</h3>
+              <div class="price-val">99 000 <span>/ oy</span></div>
+              <ul class="pricing-features">
+                <li><i class="fa-solid fa-check"></i> 10+ Boshlang'ich Dasturlar</li>
+                <li><i class="fa-solid fa-check"></i> Standart mashqlar jadvallari</li>
+                <li><i class="fa-solid fa-check"></i> Hamjamiyatga kirish</li>
+                <li class="disabled"><i class="fa-solid fa-xmark"></i> Shaxsiy Murabbiy Chat</li>
+              </ul>
+              <button class="btn btn-outline full-width">Tanlash</button>
+            </div>
+            <div class="pricing-card popular">
+              <div class="popular-badge">Ommabop</div>
+              <h3>Standart Pro</h3>
+              <div class="price-val">199 000 <span>/ oy</span></div>
+              <ul class="pricing-features">
+                <li><i class="fa-solid fa-check"></i> Barcha 50+ Dasturlar</li>
+                <li><i class="fa-solid fa-check"></i> Shaxsiy Ovqatlanish Menyusi</li>
+                <li><i class="fa-solid fa-check"></i> Murabbiy bilan haftalik muloqot</li>
+                <li><i class="fa-solid fa-check"></i> Video tahlil va maslahatlar</li>
+              </ul>
+              <button class="btn btn-primary full-width">Tanlash</button>
+            </div>
+            <div class="pricing-card">
+              <h3>VIP Premium</h3>
+              <div class="price-val">349 000 <span>/ oy</span></div>
+              <ul class="pricing-features">
+                <li><i class="fa-solid fa-check"></i> Cheksiz Barcha Imkoniyatlar</li>
+                <li><i class="fa-solid fa-check"></i> 24/7 Shaxsiy Murabbiy</li>
+                <li><i class="fa-solid fa-check"></i> Individual Video Darslar</li>
+                <li><i class="fa-solid fa-check"></i> Natijalar kafolati</li>
+              </ul>
+              <button class="btn btn-outline full-width">Tanlash</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-section">
+        <div class="container cta-box">
+          <h2>Sog'lom hayot sari birinchi qadamni qo'ying!</h2>
+          <p>Hoziroq ro'yxatdan o'ting va 7 kunlik bepul sinov muddatiga ega bo'ling.</p>
+          <button class="btn btn-primary btn-lg" onclick="switchTab('programs')">Bepul Boshlash</button>
+        </div>
+      </section>
+
     </section>
 
-    <!-- PROGRAMS SECTION -->
     <section id="programs" class="page-section">
       <div class="container">
-        <div class="breadcrumb">Bosh sahifa &gt; <span>Dasturlar</span></div>
-        <h1 class="page-title">Mashg'ulot <span class="highlight">Dasturlari</span></h1>
-        <p class="page-subtitle">O'zingizga mos dasturni tanlang va bugun boshlang</p>
-
-        <div class="search-bar-large">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" id="programSearch" placeholder="Dastur nomini qidirish...">
+        <div class="section-header">
+          <p class="breadcrumb">Bosh sahifa &gt; <span>Dasturlar</span></p>
+          <h2>Mashg'ulot <span>Dasturlari</span></h2>
+          <p class="sub-text">O'zingizga mos mashg'ulot dasturini tanlang va bugun boshlang</p>
         </div>
 
-        <div class="layout-grid">
-          <!-- Sidebar Filters -->
-          <aside class="sidebar-filter">
-            <h3><i class="fa-solid fa-sliders"></i> Filtrlar</h3>
-            
-            <div class="filter-group">
-              <label class="filter-label">KATEGORIYA</label>
-              <ul class="category-list">
-                <li><a href="#" class="filter-cat active" data-category="all">Barchasi <span class="count">9</span></a></li>
-                <li><a href="#" class="filter-cat" data-category="kuch">Kuch <span class="count">3</span></a></li>
-                <li><a href="#" class="filter-cat" data-category="kardio">Kardio <span class="count">2</span></a></li>
-                <li><a href="#" class="filter-cat" data-category="yoga">Yoga <span class="count">2</span></a></li>
-                <li><a href="#" class="filter-cat" data-category="hiit">HIIT <span class="count">1</span></a></li>
-                <li><a href="#" class="filter-cat" data-category="suzish">Suzish <span class="count">1</span></a></li>
-              </ul>
-            </div>
-
-            <div class="filter-group">
-              <label class="filter-label">DARAJA</label>
-              <div class="radio-option"><input type="radio" name="level" id="l-all" checked><label for="l-all">Barchasi</label></div>
-              <div class="radio-option"><input type="radio" name="level" id="l-bosh"><label for="l-bosh">Boshlang'ich</label></div>
-              <div class="radio-option"><input type="radio" name="level" id="l-orta"><label for="l-orta">O'rta</label></div>
-              <div class="radio-option"><input type="radio" name="level" id="l-yuqori"><label for="l-yuqori">Yuqori</label></div>
-            </div>
-
-            <button class="btn-text" id="resetFilters"><i class="fa-solid fa-rotate-left"></i> Tozalash</button>
-          </aside>
-
-          <!-- Cards Grid -->
-          <div class="content-area">
-            <div class="filter-tabs">
-              <button class="tab-btn active" data-category="all">Barchasi</button>
-              <button class="tab-btn" data-category="kuch">Kuch</button>
-              <button class="tab-btn" data-category="kardio">Kardio</button>
-              <button class="tab-btn" data-category="yoga">Yoga</button>
-              <button class="tab-btn" data-category="hiit">HIIT</button>
-              <button class="tab-btn" data-category="suzish">Suzish</button>
-            </div>
-
-            <div class="cards-grid" id="programsGrid">
-              <!-- Program items injected via JavaScript -->
-            </div>
-          </div>
+        <div class="category-tabs" id="programTabs">
+          <button class="filter-tab active" data-category="all">Barchasi</button>
+          <button class="filter-tab" data-category="kuch">Kuch</button>
+          <button class="filter-tab" data-category="kardio">Kardio</button>
+          <button class="filter-tab" data-category="yoga">Yoga</button>
+          <button class="filter-tab" data-category="hiit">HIIT</button>
+          <button class="filter-tab" data-category="suzish">Suzish</button>
         </div>
+
+        <div class="programs-grid" id="programsGrid"></div>
       </div>
     </section>
 
-    <!-- TRAINERS SECTION -->
     <section id="trainers" class="page-section">
       <div class="container">
-        <div class="breadcrumb">Bosh sahifa &gt; <span>Murabbiylar</span></div>
-        <h1 class="page-title">Bizning <span class="highlight">Murabbiylar</span></h1>
-        <p class="page-subtitle">Sertifikatlangan va professional murabbiylarimiz bilan tanishing</p>
-
-        <div class="stats-banner">
-          <div class="stat-item">
-            <h2>50+</h2>
-            <p>Sertifikatlangan murabbiylar</p>
-          </div>
-          <div class="stat-item">
-            <h2>15+</h2>
-            <p>Xalqaro sertifikatlar</p>
-          </div>
-          <div class="stat-item">
-            <h2>5,000+</h2>
-            <p>Mamnun shogirdlar</p>
-          </div>
-          <div class="stat-item">
-            <h2>4.8</h2>
-            <p>O'rtacha reyting</p>
-          </div>
+        <div class="section-header">
+          <p class="breadcrumb">Bosh sahifa &gt; <span>Murabbiylar</span></p>
+          <h2>Bizning <span>Murabbiylar</span></h2>
+          <p class="sub-text">Sertifikatlangan va professional murabbiylarimiz bilan tanishing</p>
         </div>
 
-        <div class="cards-grid grid-3" id="trainersGrid">
-          <!-- Trainer items injected via JavaScript -->
-        </div>
+        <div class="trainers-grid" id="trainersGrid"></div>
       </div>
     </section>
 
-    <!-- BLOG SECTION -->
     <section id="blog" class="page-section">
       <div class="container">
-        <div class="breadcrumb">Bosh sahifa &gt; <span>Blog</span></div>
-        <h1 class="page-title">Blog & <span class="highlight">Maqolalar</span></h1>
-        <p class="page-subtitle">Fitness, sog'liq va turmush tarzi bo'yicha qiziqarli maqolalar</p>
+        <div class="section-header">
+          <p class="breadcrumb">Bosh sahifa &gt; <span>Blog</span></p>
+          <h2>Blog & <span>Maqolalar</span></h2>
+          <p class="sub-text">Fitness, sog'liq va turmush tarzi bo'yicha qiziqarli maqolalar</p>
+        </div>
 
-        <!-- Featured Article -->
-        <div class="featured-card open-modal-article" data-id="featured">
-          <div class="featured-img-wrap">
-            <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&q=80&w=800" alt="Featured">
-            <span class="badge badge-accent">Tavsiya etilgan</span>
-          </div>
+        <div class="featured-article" onclick="openBlogModal(0)">
+          <div class="featured-img" style="background-image: url('https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=1000')"></div>
           <div class="featured-content">
-            <h2 class="featured-title">Ertaga Boshlayman Deb Hech Narsa Qilmaslik: Motivatsiya Sirlari</h2>
-            <p class="featured-excerpt">Ko'pchilik 'ertaga boshlayman' deb rejalar tuzadi, lekin hech qachon boshlamaydi. Bugun o'z motivatsiyangizni qanday topish va harakatga o'tish haqida gaplashamiz.</p>
-            <div class="author-meta">
-              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100" alt="Author">
+            <span class="badge-tag">Tavsiya etilgan</span>
+            <h3>Ertaga Boshlayman Deb Hech Narsa Qilmaslik: Motivatsiya Sirlari</h3>
+            <p>Ko'pchilik 'ertaga boshlayman' deb rejalar tuzadi, lekin hech qachon boshlamaydi. Bugun o'z motivatsiyangizni qanday topish va harakatga o'tish haqida.</p>
+            <div class="author-info">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100" alt="Jasur Toshmatov">
               <div>
-                <strong>Jasur Toshmatov</strong>
-                <span>15 Yanvar, 2024 • 5 daqiqa</span>
+                <h6>Jasur Toshmatov</h6>
+                <small>15 Yanvar, 2024 • 5 daqiqa o'qish</small>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="layout-grid blog-layout">
-          <div class="cards-grid grid-2" id="blogGrid">
-            <!-- Blog cards injected via JavaScript -->
-          </div>
-
-          <!-- Sidebar -->
-          <aside class="sidebar-blog">
-            <div class="widget">
-              <h4>Qidirish</h4>
-              <div class="widget-search">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Maqola qidirish...">
-              </div>
-            </div>
-
-            <div class="widget">
-              <h4>Kategoriyalar</h4>
-              <ul class="widget-list">
-                <li><span>Oziq-ovqat</span> <span class="pill-count">1</span></li>
-                <li><span>Yoga</span> <span class="pill-count">1</span></li>
-                <li><span>Mashg'ulot</span> <span class="pill-count">1</span></li>
-                <li><span>Sog'liq</span> <span class="pill-count">1</span></li>
-                <li><span>Motivatsiya</span> <span class="pill-count">1</span></li>
-              </ul>
-            </div>
-
-            <div class="widget">
-              <h4>Teglar</h4>
-              <div class="tags-cloud">
-                <span>#Motivatsiya</span>
-                <span>#Protein</span>
-                <span>#Sog'liq</span>
-                <span>#Yoga</span>
-                <span>#Stress</span>
-                <span>#Meditatsiya</span>
-                <span>#Kardio</span>
-                <span>#Kuch</span>
-              </div>
-            </div>
-          </aside>
-        </div>
+        <div class="blog-grid" id="blogGrid"></div>
       </div>
     </section>
 
-    <!-- CONTACT SECTION -->
     <section id="contact" class="page-section">
       <div class="container">
-        <div class="breadcrumb">Bosh sahifa &gt; <span>Bog'lanish</span></div>
-        <h1 class="page-title">Biz bilan <span class="highlight">Bog'laning</span></h1>
-        <p class="page-subtitle">Savollaringiz bormi? Biz yordam berishga tayyormiz!</p>
+        <div class="section-header">
+          <p class="breadcrumb">Bosh sahifa &gt; <span>Bog'lanish</span></p>
+          <h2>Biz bilan <span>Bog'laning</span></h2>
+          <p class="sub-text">Savollaringiz bormi? Biz yordam berishga tayyormiz!</p>
+        </div>
 
-        <div class="contact-cards-grid">
+        <div class="contact-cards">
           <div class="contact-card">
-            <div class="c-icon"><i class="fa-solid fa-location-dot"></i></div>
-            <h3>MANZIL</h3>
+            <i class="fa-solid fa-location-dot"></i>
+            <h4>MANZIL</h4>
             <p>Toshkent, Mirzo Ulug'bek ko'chasi, 15</p>
-            <span class="sub-text">Yaqin metro: Mirzo Ulug'bek</span>
           </div>
           <div class="contact-card">
-            <div class="c-icon"><i class="fa-solid fa-phone"></i></div>
-            <h3>TELEFON</h3>
-            <p>+998 71 123 45 67</p>
-            <p>+998 90 123 45 67</p>
+            <i class="fa-solid fa-phone"></i>
+            <h4>TELEFON</h4>
+            <p>+998 71 123 45 67<br>+998 90 123 45 67</p>
           </div>
           <div class="contact-card">
-            <div class="c-icon"><i class="fa-solid fa-envelope"></i></div>
-            <h3>EMAIL</h3>
-            <p>info@fitlife.uz</p>
-            <p>support@fitlife.uz</p>
+            <i class="fa-solid fa-envelope"></i>
+            <h4>EMAIL</h4>
+            <p>info@fitlife.uz<br>support@fitlife.uz</p>
           </div>
           <div class="contact-card">
-            <div class="c-icon"><i class="fa-solid fa-clock"></i></div>
-            <h3>ISH VAQTI</h3>
-            <p>Du-Ju: 07:00 - 22:00</p>
-            <p>Sh-Yak: 09:00 - 20:00</p>
+            <i class="fa-solid fa-clock"></i>
+            <h4>ISH VAQTI</h4>
+            <p>Du-Ju: 07:00 - 22:00<br>Sh-Ya: 09:00 - 20:00</p>
           </div>
         </div>
 
         <div class="contact-layout">
-          <div class="form-container">
-            <h2>Xabar Yuborish</h2>
-            <form id="contactForm">
-              <div class="form-grid">
-                <div class="input-group">
-                  <label>Ismingiz *</label>
-                  <input type="text" required placeholder="Ismingizni kiriting">
-                </div>
-                <div class="input-group">
-                  <label>Email manzilingiz *</label>
-                  <input type="email" required placeholder="Emailingizni kiriting">
-                </div>
-                <div class="input-group">
-                  <label>Telefon raqamingiz</label>
-                  <input type="tel" placeholder="+998 90 123 45 67">
-                </div>
-                <div class="input-group">
-                  <label>Mavzu *</label>
-                  <input type="text" required placeholder="Xabar mavzusi">
-                </div>
+          <form class="contact-form" id="contactForm">
+            <h3>Xabar Yuborish</h3>
+            <p class="form-desc">24 soat ichida javob beramiz</p>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Ismingiz *</label>
+                <input type="text" placeholder="Ismingizni kiriting" required>
               </div>
-              <div class="input-group">
-                <label>Xabaringiz *</label>
-                <textarea rows="5" required placeholder="Xabaringizni yozing..."></textarea>
+              <div class="form-group">
+                <label>Email manzil *</label>
+                <input type="email" placeholder="Emailingizni kiriting" required>
               </div>
-              <button type="submit" class="btn btn-primary full-btn"><i class="fa-solid fa-paper-plane"></i> Yuborish</button>
-            </form>
-          </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Telefon raqam</label>
+                <input type="tel" placeholder="+998 90 123 45 67">
+              </div>
+              <div class="form-group">
+                <label>Mavzu *</label>
+                <input type="text" placeholder="Mavzuni kiriting" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Xabaringiz *</label>
+              <textarea rows="4" placeholder="Xabaringizni bu yerga yozing..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary full-width"><i class="fa-solid fa-paper-plane"></i> Yuborish</button>
+          </form>
 
-          <div class="faq-container">
-            <h2>Ko'p So'raladigan Savollar</h2>
-            <div class="accordion">
-              <div class="accordion-item">
-                <button class="acc-header">FitLife bilan qanday boshlash mumkin? <i class="fa-solid fa-chevron-down"></i></button>
-                <div class="acc-body">Ro'yxatdan o'ting, o'zingizga mos dasturni tanlang va murabbiyimiz tavsiyalariga amal qiling.</div>
-              </div>
-              <div class="accordion-item">
-                <button class="acc-header">Mashg'ulotlar qanday o'tkaziladi? <i class="fa-solid fa-chevron-down"></i></button>
-                <div class="acc-body">Barcha video darsliklar platformada mavjud va istalgan vaqtda ko'rib mashq qilishingiz mumkin.</div>
-              </div>
-              <div class="accordion-item">
-                <button class="acc-header">Paketni bekor qilish mumkinmi? <i class="fa-solid fa-chevron-down"></i></button>
-                <div class="acc-body">Ha, istalgan vaqtda shaxsiy kabinet orqali obunani toxtatishingiz mumkin.</div>
-              </div>
+          <div class="faq-accordion">
+            <h3>Ko'p So'raladigan Savollar</h3>
+            <div class="faq-item">
+              <div class="faq-question">FitLife bilan qanday boshlash mumkin? <i class="fa-solid fa-chevron-down"></i></div>
+              <div class="faq-answer"><p>Ro'yxatdan o'ting, o'zingizga mos mashg'ulot dasturini tanlang va birinchi mashg'ulotni darhol boshlang!</p></div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question">Mashg'ulotlar qanday o'tkaziladi? <i class="fa-solid fa-chevron-down"></i></div>
+              <div class="faq-answer"><p>Barcha mashg'ulotlar interaktiv video ko'rsatmalar hamda bosqichma-bosqich jadval asosida olib boriladi.</p></div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question">Sinov muddati bormi? <i class="fa-solid fa-chevron-down"></i></div>
+              <div class="faq-answer"><p>Ha, har bir yangi foydalanuvchiga 7 kunlik bepul sinov muddati taqdim etiladi.</p></div>
             </div>
           </div>
         </div>
@@ -376,57 +446,55 @@
     </section>
   </main>
 
-  <!-- FOOTER -->
+  <div class="modal" id="infoModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeModal"><i class="fa-solid fa-xmark"></i></button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
   <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="f-col">
-          <a href="#" class="logo footer-logo nav-link" data-target="home">
-            <i class="fa-solid fa-bolt logo-icon"></i>
-            <span>FitLife</span>
-          </a>
-          <p>Professional murabbiylar va ilmiy asoslangan dasturlar bilan sog'lom hayotga qadam qo'ying.</p>
-          <div class="social-links">
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#"><i class="fa-brands fa-telegram"></i></a>
-            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#"><i class="fa-brands fa-youtube"></i></a>
-          </div>
-        </div>
-
-        <div class="f-col">
-          <h4>SAHIFALAR</h4>
-          <ul>
-            <li><a href="#" class="nav-link" data-target="home">Bosh sahifa</a></li>
-            <li><a href="#" class="nav-link" data-target="programs">Dasturlar</a></li>
-            <li><a href="#" class="nav-link" data-target="trainers">Murabbiylar</a></li>
-            <li><a href="#" class="nav-link" data-target="blog">Blog</a></li>
-            <li><a href="#" class="nav-link" data-target="contact">Bog'lanish</a></li>
-          </ul>
-        </div>
-
-        <div class="f-col">
-          <h4>DASTURLAR</h4>
-          <ul>
-            <li><a href="#">Kuch trenirovkalari</a></li>
-            <li><a href="#">Kardio</a></li>
-            <li><a href="#">Yoga & Meditatsiya</a></li>
-            <li><a href="#">HIIT</a></li>
-            <li><a href="#">Suzish</a></li>
-          </ul>
-        </div>
-
-        <div class="f-col">
-          <h4>YANGILIKLAR</h4>
-          <p>So'nggi yangiliklar va maxsus takliflar uchun obuna bo'ling.</p>
-          <form class="newsletter-form" id="newsletterForm">
-            <input type="email" placeholder="email@manzil.uz" required>
-            <button type="submit" class="btn btn-primary">Obuna bo'lish</button>
-          </form>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <a href="#" class="logo footer-logo"><i class="fa-solid fa-bolt logo-icon"></i> FitLife</a>
+        <p>Professional murabbiylar va ilmiy asoslangan dasturlar bilan sog'lom hayotga qadam qo'ying.</p>
+        <div class="social-links">
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-telegram"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
         </div>
       </div>
-
-      <div class="footer-bottom">
+      <div class="footer-col">
+        <h4>SAHIFALAR</h4>
+        <ul>
+          <li><a href="#" onclick="switchTab('home')">Bosh sahifa</a></li>
+          <li><a href="#" onclick="switchTab('programs')">Dasturlar</a></li>
+          <li><a href="#" onclick="switchTab('trainers')">Murabbiylar</a></li>
+          <li><a href="#" onclick="switchTab('blog')">Blog</a></li>
+          <li><a href="#" onclick="switchTab('contact')">Bog'lanish</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>DASTURLAR</h4>
+        <ul>
+          <li><a href="#">Kuch trenirovka</a></li>
+          <li><a href="#">Kardio</a></li>
+          <li><a href="#">Yoga & Meditatsiya</a></li>
+          <li><a href="#">HIIT</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>YANGILIKLAR</h4>
+        <p>So'nggi yangiliklar va maxsus takliflar uchun obuna bo'ling.</p>
+        <form class="subscribe-form" onsubmit="event.preventDefault(); alert('Obuna bo\'ldingiz!');">
+          <input type="email" placeholder="email@manzil.uz" required>
+          <button type="submit" class="btn btn-primary">Obuna bo'lish</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container flex-between">
         <p>© 2026 FitLife. Barcha huquqlar himoyalangan.</p>
         <div class="legal-links">
           <a href="#">Maxfiylik siyosati</a>
@@ -436,14 +504,6 @@
     </div>
   </footer>
 
-  <!-- DYNAMIC MODAL CONTAINER -->
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal-card" id="modalCard">
-      <button class="modal-close" id="modalClose"><i class="fa-solid fa-xmark"></i></button>
-      <div id="modalContent"></div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+  <script src="./script.js"></script>
 </body>
 </html>
