@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitLife — Kelajak Sport Va Salomatlik Platformasi</title>
+    <title>FitLife - Zamonaviy Fitnes Platformasi</title>
     
     <!-- Google Fonts: Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,62 +12,64 @@
     
     <!-- Bootstrap 5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./style.css">
-
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg sticky-top glass-nav py-3">
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar navbar-expand-lg glass-nav sticky-top py-3">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center fw-bold fs-3 text-gradient" href="#" onclick="navigateTo('home'); return false;">
-                <i class="bi bi-lightning-charge-fill me-2 text-primary"></i>FitLife
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#" onclick="switchPage('home')">
+                <div class="bg-gradient-custom text-white rounded-3 p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                    <i class="bi bi-lightning-charge-fill fs-5"></i>
+                </div>
+                <span class="fw-bold fs-4 text-dark">Fit<span class="text-gradient">Life</span></span>
             </a>
+
             
-            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
-                <span class="navbar-toggler-icon"></span>
+
+            <!-- Mobile Offcanvas Trigger -->
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNavbar">
+                <i class="bi bi-list fs-2 text-dark"></i>
             </button>
 
             <!-- Desktop Menu -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fw-medium">
+            <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
+                <ul class="navbar-nav gap-2 me-3">
                     <li class="nav-item">
-                        <a class="nav-link nav-btn active px-3" href="#" id="nav-home" onclick="navigateTo('home'); return false;">Bosh sahifa</a>
+                        <a class="nav-link px-3 active-nav" id="nav-home" href="#" onclick="switchPage('home')">Bosh </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-btn px-3" href="#" id="nav-programs" onclick="navigateTo('programs'); return false;">Dasturlar</a>
+                        <a class="nav-link px-3" id="nav-programs" href="#" onclick="switchPage('programs')">Dasturlar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-btn px-3" href="#" id="nav-trainers" onclick="navigateTo('trainers'); return false;">Murabbiylar</a>
+                        <a class="nav-link px-3" id="nav-trainers" href="#" onclick="switchPage('trainers')">Murabbiylar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-btn px-3" href="#" id="nav-blog" onclick="navigateTo('blog'); return false;">Blog</a>
+                        <a class="nav-link px-3" id="nav-blog" href="#" onclick="switchPage('blog')">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-btn px-3" href="#" id="nav-contact" onclick="navigateTo('contact'); return false;">Bog'lanish</a>
+                        <a class="nav-link px-3" id="nav-contact" href="#" onclick="switchPage('contact')">Bog'lanish</a>
                     </li>
                 </ul>
 
-                <div class="d-flex align-items-center gap-2">
-                    <button class="btn btn-light rounded-circle p-2 shadow-sm" data-bs-toggle="modal" data-bs-target="#searchModal" title="Qidiruv">
-                        <i class="bi bi-search"></i>
-                    </button>
-                    
+                <div class="d-flex align-items-center gap-3">
+                    <!-- Language Select -->
                     <div class="dropdown">
-                        <button class="btn btn-light rounded-pill px-3 shadow-sm dropdown-toggle fw-semibold" type="button" id="langDropdown" data-bs-toggle="dropdown">
-                            <span id="currentLang">UZ</span>
+                        <button class="btn btn-sm btn-light rounded-pill px-3 dropdown-toggle font-weight-bold" type="button" data-bs-toggle="dropdown" id="langBtn">
+                             UZ
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-20">
-                            <li><a class="dropdown-item fw-medium" href="#" onclick="switchLang('UZ'); return false;">Uzbek (UZ)</a></li>
-                            <li><a class="dropdown-item fw-medium" href="#" onclick="switchLang('RU'); return false;">Русский (RU)</a></li>
+                        <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm rounded-16">
+                            <li><a class="dropdown-item fw-medium" href="#" onclick="changeLang('UZ')"> uz</a></li>
+                            <li><a class="dropdown-item fw-medium" href="#" onclick="changeLang('RU')">🇷🇺 </a></li>
                         </ul>
                     </div>
 
-                    <button class="btn btn-gradient ms-2" data-bs-toggle="modal" data-bs-target="#authModal">
-                        <i class="bi bi-person-circle me-1"></i> Kirish
+                    <!-- Login Button -->
+                    <button class="btn btn-gradient text-white rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        <i class="bi bi-person-fill me-1"></i> Kirish
                     </button>
                 </div>
             </div>
@@ -75,560 +77,649 @@
     </nav>
 
     <!-- MOBILE OFFCANVAS MENU -->
-    <div class="offcanvas offcanvas-end rounded-start-4" tabindex="-1" id="mobileMenu">
+    <div class="offcanvas offcanvas-end rounded-start-4" tabindex="-1" id="mobileNavbar">
         <div class="offcanvas-header border-bottom">
-            <h5 class="offcanvas-title fw-bold text-gradient"><i class="bi bi-lightning-charge-fill me-2"></i>FitLife</h5>
+            <h5 class="offcanvas-title fw-bold text-gradient">FitLife</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body d-flex flex-column justify-content-between">
-            <ul class="navbar-nav fs-5 fw-semibold gap-2">
-                <li class="nav-item"><a class="nav-link" href="#" onclick="navigateTo('home'); closeOffcanvas(); return false;">Bosh sahifa</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" onclick="navigateTo('programs'); closeOffcanvas(); return false;">Dasturlar</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" onclick="navigateTo('trainers'); closeOffcanvas(); return false;">Murabbiylar</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" onclick="navigateTo('blog'); closeOffcanvas(); return false;">Blog</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" onclick="navigateTo('contact'); closeOffcanvas(); return false;">Bog'lanish</a></li>
+            <ul class="navbar-nav gap-2">
+                <li class="nav-item">
+                    <a class="nav-link fs-5 fw-medium text-dark" href="#" onclick="switchPage('home')" data-bs-dismiss="offcanvas"><i class="bi bi-house me-2"></i> Bosh sahifa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-5 fw-medium text-dark" href="#" onclick="switchPage('programs')" data-bs-dismiss="offcanvas"><i class="bi bi-grid-fill me-2"></i> Dasturlar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-5 fw-medium text-dark" href="#" onclick="switchPage('trainers')" data-bs-dismiss="offcanvas"><i class="bi bi-people me-2"></i> Murabbiylar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-5 fw-medium text-dark" href="#" onclick="switchPage('blog')" data-bs-dismiss="offcanvas"><i class="bi bi-journal-text me-2"></i> Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-5 fw-medium text-dark" href="#" onclick="switchPage('contact')" data-bs-dismiss="offcanvas"><i class="bi bi-envelope me-2"></i> Bog'lanish</a>
+                </li>
             </ul>
+
             <div class="pt-4 border-top">
-                <button class="btn btn-gradient w-100 mb-2" data-bs-toggle="modal" data-bs-target="#authModal" onclick="closeOffcanvas();">Kirish / Ro'yxatdan o'tish</button>
+                <button class="btn btn-gradient w-full py-3 mb-3 rounded-16" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="offcanvas">
+                    <i class="bi bi-box-arrow-in-right me-2"></i> Tizimga Kirish
+                </button>
+                <div class="d-flex justify-content-center gap-2">
+                    <button class="btn btn-outline-secondary btn-sm rounded-pill px-3" onclick="changeLang('UZ')">O'zbekcha</button>
+                    <button class="btn btn-outline-secondary btn-sm rounded-pill px-3" onclick="changeLang('RU')">Русский</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- MAIN CONTAINER -->
-    <main class="flex-grow-1">
-        
+
+    <!-- ==================== MAIN CONTENT CONTAINER ==================== -->
+    <main class="container my-4">
+
         <!-- PAGE 1: BOSH SAHIFA (HOME) -->
-        <section id="page-home" class="page-section active-page">
-            
+        <section id="page-home" class="page-section active">
             <!-- Hero Section -->
-            <div class="container py-5">
-                <div class="row align-items-center g-5 py-3">
-                    <div class="col-lg-6">
-                        <span class="badge bg-light-blue text-primary px-3 py-2 rounded-pill fw-semibold mb-3">
-                            <i class="bi bi-stars me-1"></i> Sun'iy Intellekt Dasturlari 2.0
-                        </span>
-                        <h1 class="display-4 fw-extrabold mb-3 text-dark lh-sm">
-                            Sog'lom Hayot Tarzini <span class="text-gradient">FitLife</span> Bilan Boshlang
-                        </h1>
-                        <p class="lead text-muted mb-4 fs-6">
-                            Shaxsiy mashg'ulot rejalari, malakali murabbiylar, to'g'ri ovqatlanish ratsioni va zamonaviy statistika — barchasi bitta qulay platformada.
-                        </p>
-                        <div class="d-flex flex-wrap gap-3 mb-4">
-                            <button class="btn btn-gradient btn-lg fs-6" onclick="navigateTo('programs')">
-                                Bepul Boshlash <i class="bi bi-arrow-right ms-2"></i>
-                            </button>
-                            <button class="btn btn-outline-custom btn-lg fs-6" onclick="navigateTo('trainers')">
-                                <i class="bi bi-play-circle me-2"></i> Murabbiylarni Ko'rish
-                            </button>
+            <div class="row align-items-center my-4 py-lg-4 g-5">
+                <div class="col-lg-6">
+                    <span class="badge badge-soft mb-3"><i class="bi bi-fire me-1"></i> №1 Fitnes Platforma Toshkentda</span>
+                    <h1 class="display-4 fw-bold lh-sm mb-4">Sog'lom turmush tarzingizni <span class="text-gradient">FitLife</span> bilan boshlang</h1>
+                    <p class="lead text-muted mb-4">Shaxsiy mashg'ulot rejalari, professional murabbiylar va to'g'ri ovqatlanish dasturlari — barchasi bitta qulay platformada.</p>
+                    <div class="d-flex flex-wrap gap-3 mb-4">
+                        <button class="btn btn-gradient px-4 py-3 text-white fs-6" onclick="switchPage('programs')">
+                            Dasturni Boshlash <i class="bi bi-arrow-right ms-2"></i>
+                        </button>
+                        <button class="btn btn-outline-gradient px-4 py-3 fs-6" onclick="switchPage('trainers')">
+                            Murabbiylar Bilan Tanishish
+                        </button>
+                    </div>
+                    <div class="d-flex align-items-center gap-4 pt-3 border-top">
+                        <div>
+                            <h4 class="fw-bold mb-0 text-dark">10,000+</h4>
+                            <small class="text-muted">Faol A'zolar</small>
                         </div>
-                        
-                        <!-- Quick Stats Badges -->
-                        <div class="row g-3 pt-3">
-                            <div class="col-4">
-                                <div class="glass-card p-3 text-center">
-                                    <h3 class="fw-bold text-primary mb-0">15K+</h3>
-                                    <small class="text-muted fw-medium">A'zolar</small>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="glass-card p-3 text-center">
-                                    <h3 class="fw-bold text-success mb-0">50+</h3>
-                                    <small class="text-muted fw-medium">Murabbiylar</small>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="glass-card p-3 text-center">
-                                    <h3 class="fw-bold text-primary mb-0">98%</h3>
-                                    <small class="text-muted fw-medium">Natija</small>
-                                </div>
+                        <div class="vr"></div>
+                        <div>
+                            <h4 class="fw-bold mb-0 text-dark">50+</h4>
+                            <small class="text-muted">Professional Murabbiylar</small>
+                        </div>
+                        <div class="vr"></div>
+                        <div>
+                            <h4 class="fw-bold mb-0 text-dark">98%</h4>
+                            <small class="text-muted">Ijobiy Natijalar</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 position-relative">
+                    <!-- Floating Badge 1 -->
+                    <div class="glass-card p-3 floating-stat" style="top: 20px; left: -10px; width: 180px;">
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="bg-success text-white rounded-circle p-2 d-flex"><i class="bi bi-check-circle-fill fs-5"></i></div>
+                            <div>
+                                <h6 class="mb-0 fw-bold fs-7">Kunlik Dastur</h6>
+                                <small class="text-muted" style="font-size: 0.75rem;">100% Bajarildi</small>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="col-lg-6">
-                        <div class="position-relative">
-                            <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80" alt="Fitness Banner" class="img-fluid rounded-20 shadow-lg w-100" style="max-height: 480px; object-fit: cover;">
-                            <div class="glass-card p-3 position-absolute bottom-0 start-0 m-4 shadow-lg d-flex align-items-center gap-3 rounded-20" style="max-width: 280px;">
-                                <div class="bg-success text-white p-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                                    <i class="bi bi-activity fs-4"></i>
-                                </div>
-                                <div>
-                                    <h6 class="mb-0 fw-bold">Kunlik Maqsad</h6>
-                                    <small class="text-muted">850 / 1000 Kkal yakunlandi</small>
-                                </div>
+
+                    <!-- Floating Badge 2 -->
+                    <div class="glass-card p-3 floating-stat" style="bottom: 30px; right: 10px; width: 200px; animation-delay: 2s;">
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="bg-primary text-white rounded-circle p-2 d-flex"><i class="bi bi-heart-pulse-fill fs-5"></i></div>
+                            <div>
+                                <h6 class="mb-0 fw-bold fs-7">Yoqilgan Kaloriya</h6>
+                                <small class="text-success fw-bold" style="font-size: 0.8rem;">+650 kcal bugun</small>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Main Hero Image -->
+                    <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1000&auto=format&fit=crop" alt="Fitness" class="img-fluid rounded-20 shadow-lg w-100" style="max-height: 480px; object-fit: cover;">
                 </div>
             </div>
 
             <!-- Workout Categories Carousel -->
-            <div class="bg-white py-5 my-4 border-top border-bottom">
-                <div class="container">
-                    <div class="d-flex justify-content-between align-items-end mb-4">
-                        <div>
-                            <span class="text-gradient fw-bold text-uppercase tracking-wide small">Kategoriyalar</span>
-                            <h2 class="fw-bold text-dark mb-0">Ommabop Mashg'ulot Yo'nalishlari</h2>
-                        </div>
-                        <button class="btn btn-outline-custom btn-sm" onclick="navigateTo('programs')">Barchasi <i class="bi bi-chevron-right"></i></button>
+            <div class="my-5 py-4">
+                <div class="d-flex justify-content-between align-items-end mb-4">
+                    <div>
+                        <span class="badge badge-soft mb-2">Kategoriyalar</span>
+                        <h2 class="fw-bold mb-0">Mashg'ulot Yo'nalishlari</h2>
                     </div>
+                    <button class="btn btn-link text-primary text-decoration-none fw-bold" onclick="switchPage('programs')">Barchasini ko'rish <i class="bi bi-chevron-right"></i></button>
+                </div>
 
-                    <!-- Carousel Component -->
-                    <div id="workoutCarousel" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="row g-4">
-                                    <div class="col-md-4">
-                                        <div class="card border-0 shadow-sm rounded-20 overflow-hidden h-100">
-                                            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Fitnes">
-                                            <div class="card-body">
-                                                <h5 class="fw-bold">Kuch-quvvat Mashqlari</h5>
-                                                <p class="text-muted small">Mushaklar massasini oshirish va tanani shakllantirish uchun maxsus dastur.</p>
-                                            </div>
+                <div id="categoryCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row g-4">
+                                <div class="col-md-3">
+                                    <div class="glass-card p-4 text-center h-100 cursor-pointer" onclick="filterPrograms('kardio')">
+                                        <div class="bg-primary text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                            <i class="bi bi-heart-pulse fs-3"></i>
                                         </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card border-0 shadow-sm rounded-20 overflow-hidden h-100">
-                                            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Yoga">
-                                            <div class="card-body">
-                                                <h5 class="fw-bold">Yoga va Meditatsiya</h5>
-                                                <p class="text-muted small">Tana va ruhiyat muvozanatini tiklash hamda egiluvchanlikni oshirish.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card border-0 shadow-sm rounded-20 overflow-hidden h-100">
-                                            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Kardio">
-                                            <div class="card-body">
-                                                <h5 class="fw-bold">Intensiv Kardio (HIIT)</h5>
-                                                <p class="text-muted small">Vazn yo'qotish va yurak-qon tomir tizimini mustahkamlash mashqlari.</p>
-                                            </div>
-                                        </div>
+                                        <h5 class="fw-bold">Kardio</h5>
+                                        <p class="text-muted small">Yurak salomatligi va yog' eritish mashqlari</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="row g-4">
-                                    <div class="col-md-4">
-                                        <div class="card border-0 shadow-sm rounded-20 overflow-hidden h-100">
-                                            <img src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Pilates">
-                                            <div class="card-body">
-                                                <h5 class="fw-bold">Pilates va Stretch</h5>
-                                                <p class="text-muted small">Qomatni tiklash va bo'g'imlar harakatchanligini rivojlantirish.</p>
-                                            </div>
+                                <div class="col-md-3">
+                                    <div class="glass-card p-4 text-center h-100 cursor-pointer" onclick="filterPrograms('kuch')">
+                                        <div class="bg-success text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                            <i class="bi bi-activity fs-3"></i>
                                         </div>
+                                        <h5 class="fw-bold">Kuch Mashqlari</h5>
+                                        <p class="text-muted small">Mushaklar hajmini oshirish va kuchaytirish</p>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="card border-0 shadow-sm rounded-20 overflow-hidden h-100">
-                                            <img src="https://images.unsplash.com/photo-1517931524326-bdd55a541177?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Crossfit">
-                                            <div class="card-body">
-                                                <h5 class="fw-bold">Krossfit Zonalari</h5>
-                                                <p class="text-muted small">Chidamlilik va umumiy jismoniy tayyorgarlikni maksimal darajaga ko'tarish.</p>
-                                            </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="glass-card p-4 text-center h-100 cursor-pointer" onclick="filterPrograms('yoga')">
+                                        <div class="bg-warning text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                            <i class="bi bi-flower1 fs-3"></i>
                                         </div>
+                                        <h5 class="fw-bold">Yoga & Pilates</h5>
+                                        <p class="text-muted small">Moslashuvchanlik va ruhiy xotirjamlik</p>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="card border-0 shadow-sm rounded-20 overflow-hidden h-100">
-                                            <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Running">
-                                            <div class="card-body">
-                                                <h5 class="fw-bold">Yugurish Klubi</h5>
-                                                <p class="text-muted small">Guruh bo'lib ochiq havoda professional murabbiylar bilan yugurish.</p>
-                                            </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="glass-card p-4 text-center h-100 cursor-pointer" onclick="filterPrograms('crossfit')">
+                                        <div class="bg-danger text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                            <i class="bi bi-trophy fs-3"></i>
                                         </div>
+                                        <h5 class="fw-bold">Crossfit</h5>
+                                        <p class="text-muted small">Yuqori intensivlikdagi funksional fitnes</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#workoutCarousel" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#workoutCarousel" data-bs-slide="next">
-                            <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
-                        </button>
                     </div>
                 </div>
             </div>
 
             <!-- Features Section (6 Cards) -->
-            <div class="container py-5">
-                <div class="text-center max-w-lg mx-auto mb-5">
-                    <span class="badge bg-light-green text-success px-3 py-2 rounded-pill fw-semibold mb-2">Afsalliklarimiz</span>
-                    <h2 class="fw-bold fs-2 text-dark">Nega aynan FitLife platformasini tanlashadi?</h2>
+            <div class="my-5 py-4">
+                <div class="text-center mb-5">
+                    <span class="badge badge-soft mb-2">Afzalliklarimiz</span>
+                    <h2 class="fw-bold mb-3">Nega Aynan FitLife Platformasi?</h2>
+                    <p class="text-muted mx-auto" style="max-width: 600px;">Biz sizning maqsadingizga tezroq va xavfsiz erishishingiz uchun zamonaviy texnologiyalardan foydalanamiz.</p>
                 </div>
 
                 <div class="row g-4">
                     <div class="col-md-4">
                         <div class="glass-card p-4 h-100">
-                            <div class="bg-light-blue text-primary p-3 rounded-4 d-inline-block mb-3">
-                                <i class="bi bi-cpu fs-3"></i>
+                            <div class="bg-gradient-custom text-white rounded-3 p-3 d-inline-block mb-3">
+                                <i class="bi bi-person-check fs-4"></i>
                             </div>
-                            <h5 class="fw-bold">AI Algoritm Ovqatlanish</h5>
-                            <p class="text-muted small mb-0">Sizning vazningiz, maqsadingiz va kaloriya talabingizga moslashtirilgan sun'iy intellekt menyusi.</p>
+                            <h5 class="fw-bold">Shaxsiy Dastur</h5>
+                            <p class="text-muted">Sizning tana tuzilishingiz va maqsadingizga moslashtirilgan individual mashqlar rejasi.</p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="glass-card p-4 h-100">
-                            <div class="bg-light-green text-success p-3 rounded-4 d-inline-block mb-3">
-                                <i class="bi bi-person-badge fs-3"></i>
+                            <div class="bg-gradient-custom text-white rounded-3 p-3 d-inline-block mb-3">
+                                <i class="bi bi-headset fs-4"></i>
                             </div>
-                            <h5 class="fw-bold">Sertifikatlangan Murabbiylar</h5>
-                            <p class="text-muted small mb-0">Xalqaro darajadagi malakali trenerlar tomonidan individual online va offline ko'rsatmalari.</p>
+                            <h5 class="fw-bold">24/7 Qo'llab-quvvatlash</h5>
+                            <p class="text-muted">Professional murabbiylarimiz har qanday savolingizga tezkor javob berishadi.</p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="glass-card p-4 h-100">
-                            <div class="bg-light-purple text-primary p-3 rounded-4 d-inline-block mb-3">
-                                <i class="bi bi-graph-up-arrow fs-3"></i>
+                            <div class="bg-gradient-custom text-white rounded-3 p-3 d-inline-block mb-3">
+                                <i class="bi bi-egg-fried fs-4"></i>
                             </div>
-                            <h5 class="fw-bold">Aqlli Statistika</h5>
-                            <p class="text-muted small mb-0">Har bir mashg'ulot va erishilgan natijalarni grafik hamda hisobotlar orqali kuzatib boring.</p>
+                            <h5 class="fw-bold">Nutrition Reja</h5>
+                            <p class="text-muted">Dietologlar tomonidan tuzilgan to'g'ri va mazali taomnoma retseptlari.</p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="glass-card p-4 h-100">
-                            <div class="bg-light-green text-success p-3 rounded-4 d-inline-block mb-3">
-                                <i class="bi bi-calendar-check fs-3"></i>
+                            <div class="bg-gradient-custom text-white rounded-3 p-3 d-inline-block mb-3">
+                                <i class="bi bi-phone fs-4"></i>
                             </div>
-                            <h5 class="fw-bold">Moslashuvchan Jadvallar</h5>
-                            <p class="text-muted small mb-0">O'zingizga qulay vaqt va joyda shug'ullanish imkonini beruvchi interaktiv jadval.</p>
+                            <h5 class="fw-bold">Mobile Ilova</h5>
+                            <p class="text-muted">Mashg'ulotlarni istalgan joyda, telefoningiz orqali kuzatib boring.</p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="glass-card p-4 h-100">
-                            <div class="bg-light-blue text-primary p-3 rounded-4 d-inline-block mb-3">
-                                <i class="bi bi-chat-heart fs-3"></i>
+                            <div class="bg-gradient-custom text-white rounded-3 p-3 d-inline-block mb-3">
+                                <i class="bi bi-camera-video fs-4"></i>
                             </div>
-                            <h5 class="fw-bold">Jamiyat va Qo'llab-quvvatlash</h5>
-                            <p class="text-muted small mb-0">15 000+ faol sportchilar va maslakdoshlar hamjamiyati bilan fikr va tajriba almashish.</p>
+                            <h5 class="fw-bold">Jonli Mashg'ulotlar</h5>
+                            <p class="text-muted">Har kuni onlayn rejimda o'tkaziladigan guruh mashg'ulotlariga qo'shiling.</p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="glass-card p-4 h-100">
-                            <div class="bg-light-purple text-primary p-3 rounded-4 d-inline-block mb-3">
-                                <i class="bi bi-award fs-3"></i>
+                            <div class="bg-gradient-custom text-white rounded-3 p-3 d-inline-block mb-3">
+                                <i class="bi bi-award fs-4"></i>
                             </div>
-                            <h5 class="fw-bold">Motivatsiya va Mukofotlar</h5>
-                            <p class="text-muted small mb-0">Har bir erishilgan marra uchun maxsus nishonlar va obuna chegirmalariga ega bo'ling.</p>
+                            <h5 class="fw-bold">Natija Kafolati</h5>
+                            <p class="text-muted">Ko'rsatmalarga rioya qiling va 30 kun ichida birinchi natijalarni his eting.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Pricing Plans Section -->
-            <div class="bg-white py-5 border-top border-bottom">
-                <div class="container py-3">
-                    <div class="text-center mb-5">
-                        <span class="badge bg-light-blue text-primary px-3 py-2 rounded-pill fw-semibold mb-2">Ta'riflar</span>
-                        <h2 class="fw-bold text-dark fs-2">O'zingizga Mos Tarifni Tanlang</h2>
-                        <div class="d-flex align-items-center justify-content-center gap-3 mt-4">
-                            <span class="fw-medium">Oylik</span>
-                            <div class="form-check form-switch fs-4 mb-0">
-                                <input class="form-check-input" type="checkbox" id="pricingToggle" onchange="togglePricing()">
+            <!-- Pricing Cards Section -->
+            <div class="my-5 py-4">
+                <div class="text-center mb-4">
+                    <span class="badge badge-soft mb-2">Ta'riflar</span>
+                    <h2 class="fw-bold mb-3">O'zingizga Mos Tarifni Tanlang</h2>
+                    <div class="d-flex justify-content-center align-items-center gap-3 mt-3">
+                        <span class="fw-medium">Oylik</span>
+                        <div class="form-check form-switch m-0 fs-5">
+                            <input class="form-check-input" type="checkbox" id="pricingToggle" onchange="togglePricing()">
+                        </div>
+                        <span class="fw-medium">Yillik <span class="badge bg-danger rounded-pill fs-7">-20% Chegirma</span></span>
+                    </div>
+                </div>
+
+                <div class="row g-4 justify-content-center">
+                    <!-- Starter Plan -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="glass-card p-4 text-center h-100 d-flex flex-column justify-content-between">
+                            <div>
+                                <h4 class="fw-bold">Boshlang'ich</h4>
+                                <p class="text-muted">Mustaqil shug'ullanuvchilar uchun</p>
+                                <div class="my-4">
+                                    <span class="display-5 fw-bold text-gradient price-amount" data-monthly="150,000" data-yearly="120,000">150,000</span>
+                                    <span class="text-muted"> so'm / oy</span>
+                                </div>
+                                <ul class="list-unstyled text-start mb-4">
+                                    <li class="py-2 border-bottom"><i class="bi bi-check2 text-success me-2"></i> Barcha standart mashqlar</li>
+                                    <li class="py-2 border-bottom"><i class="bi bi-check2 text-success me-2"></i> Mobile ilovaga kirish</li>
+                                    <li class="py-2 border-bottom"><i class="bi bi-check2 text-success me-2"></i> Kaloriya kalkulyatori</li>
+                                    <li class="py-2 text-muted"><i class="bi bi-x text-danger me-2"></i> Shaxsiy murabbiy maslahati</li>
+                                </ul>
                             </div>
-                            <span class="fw-medium">Yillik <span class="badge bg-danger rounded-pill fs-6 ms-1">-20% Chegirma</span></span>
+                            <button class="btn btn-outline-gradient w-100" onclick="showToast('Boshlang\'ich tarif tanlandi!')">Tanlash</button>
                         </div>
                     </div>
 
-                    <div class="row g-4 align-items-center">
-                        <div class="col-lg-4">
-                            <div class="glass-card p-4 text-center">
-                                <h5 class="fw-bold text-muted">Boshlang'ich</h5>
-                                <div class="my-3">
-                                    <span class="display-5 fw-bold text-dark price-val" data-monthly="150,000" data-yearly="1,440,000">150,000</span>
-                                    <span class="text-muted"> so'm/<span class="period-val">oy</span></span>
+                    <!-- Standard Pro Plan -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="glass-card p-4 text-center h-100 border-primary border-2 position-relative d-flex flex-column justify-content-between">
+                            <span class="position-absolute top-0 start-50 translate-middle badge bg-gradient-custom px-3 py-2 rounded-pill">Eng Ommabop</span>
+                            <div>
+                                <h4 class="fw-bold mt-2">Standard Pro</h4>
+                                <p class="text-muted">Tez va samarali natija uchun</p>
+                                <div class="my-4">
+                                    <span class="display-5 fw-bold text-gradient price-amount" data-monthly="290,000" data-yearly="230,000">290,000</span>
+                                    <span class="text-muted"> so'm / oy</span>
                                 </div>
-                                <ul class="list-unstyled text-start my-4 gap-2 d-flex flex-column text-muted small">
-                                    <li><i class="bi bi-check-circle-fill text-success me-2"></i> Asosiy mashg'ulot videolari</li>
-                                    <li><i class="bi bi-check-circle-fill text-success me-2"></i> Standard ovqatlanish menyusi</li>
-                                    <li><i class="bi bi-check-circle-fill text-success me-2"></i> Jamiyat guruhida muloqot</li>
-                                    <li class="text-black-50"><i class="bi bi-x-circle me-2"></i> Shaxsiy murabbiy maslahati</li>
+                                <ul class="list-unstyled text-start mb-4">
+                                    <li class="py-2 border-bottom"><i class="bi bi-check2 text-success me-2"></i> Barcha premium mashqlar</li>
+                                    <li class="py-2 border-bottom"><i class="bi bi-check2 text-success me-2"></i> Shaxsiy Nutrition taomnoma</li>
+                                    <li class="py-2 border-bottom"><i class="bi bi-check2 text-success me-2"></i> Murabbiy bilan haftalik chat</li>
+                                    <li class="py-2 border-bottom"><i class="bi bi-check2 text-success me-2"></i> Jonli mashg'ulotlarga ruxsat</li>
                                 </ul>
-                                <button class="btn btn-outline-custom w-100" data-bs-toggle="modal" data-bs-target="#authModal">Tanlash</button>
                             </div>
+                            <button class="btn btn-gradient w-100" onclick="showToast('Standard Pro tarif tanlandi!')">Hozir Boshlash</button>
                         </div>
-                        <div class="col-lg-4">
-                            <div class="glass-card p-4 text-center border-primary border-2 position-relative shadow-lg">
-                                <span class="position-absolute top-0 start-50 translate-middle badge bg-gradient-primary rounded-pill px-3 py-2">EGGAN OMMABOP</span>
-                                <h5 class="fw-bold text-primary mt-2">Pro FitLife</h5>
-                                <div class="my-3">
-                                    <span class="display-4 fw-bold text-dark price-val" data-monthly="290,000" data-yearly="2,780,000">290,000</span>
-                                    <span class="text-muted"> so'm/<span class="period-val">oy</span></span>
+                    </div>
+
+                    <!-- VIP Plan -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="glass-card p-4 text-center h-100 d-flex flex-column justify-content-between">
+                            <div>
+                                <h4 class="fw-bold">VIP Premium</h4>
+                                <p class="text-muted">To'liq individual yondashuv</p>
+                                <div class="my-4">
+                                    <span class="display-5 fw-bold text-gradient price-amount" data-monthly="490,000" data-yearly="390,000">490,000</span>
+                                    <span class="text-muted"> so'm / oy</span>
                                 </div>
-                                <ul class="list-unstyled text-start my-4 gap-2 d-flex flex-column text-dark small fw-medium">
-                                    <li><i class="bi bi-check-circle-fill text-success me-2"></i> Barcha video dasturlarga kirish</li>
-                                    <li><i class="bi bi-check-circle-fill text-success me-2"></i> AI individual taomnoma</li>
-                                    <li><i class="bi bi-check-circle-fill text-success me-2"></i> Oylik murabbiy bilan 2x suhbat</li>
-                                    <li><i class="bi bi-check-circle-fill text-success me-2"></i> Aqlli statistik tahlillar</li>
+                                <ul class="list-unstyled text-start mb-4">
+                                    <li class="py-2 border-bottom"><i class="bi bi-check2 text-success me-2"></i> Cheksiz shaxsiy murabbiy</li>
+                                    <li class="py-2 border-bottom"><i class="bi bi-check2 text-success me-2"></i> Eksklyuziv video darslar</li>
+                                    <li class="py-2 border-bottom"><i class="bi bi-check2 text-success me-2"></i> Har haftalik tana tahlili</li>
+                                    <li class="py-2 border-bottom"><i class="bi bi-check2 text-success me-2"></i> 24/7 VIP Qo'llab-quvvatlash</li>
                                 </ul>
-                                <button class="btn btn-gradient w-100" data-bs-toggle="modal" data-bs-target="#authModal">A'zo bo'lish</button>
                             </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="glass-card p-4 text-center">
-                                <h5 class="fw-bold text-muted">VIP Individual</h5>
-                                <div class="my-3">
-                                    <span class="display-5 fw-bold text-dark price-val" data-monthly="550,000" data-yearly="5,280,000">550,000</span>
-                                    <span class="text-muted"> so'm/<span class="period-val">oy</span></span>
-                                </div>
-                                <ul class="list-unstyled text-start my-4 gap-2 d-flex flex-column text-muted small">
-                                    <li><i class="bi bi-check-circle-fill text-success me-2"></i> Cheksiz murabbiy maslahati</li>
-                                    <li><i class="bi bi-check-circle-fill text-success me-2"></i> VIP zal va tadbirlarga taklifnoma</li>
-                                    <li><i class="bi bi-check-circle-fill text-success me-2"></i> Kunlik ovqatlanish nazorati</li>
-                                    <li><i class="bi bi-check-circle-fill text-success me-2"></i> 24/7 Shaxsiy nutriolog</li>
-                                </ul>
-                                <button class="btn btn-outline-custom w-100" data-bs-toggle="modal" data-bs-target="#authModal">A'zo bo'lish</button>
-                            </div>
+                            <button class="btn btn-outline-gradient w-100" onclick="showToast('VIP Premium tarif tanlandi!')">VIP A'zo Bo'lish</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Testimonials & Newsletter Section -->
-            <div class="container py-5">
-                <div class="glass-card bg-gradient-primary text-white p-5 rounded-20 shadow-lg text-center my-4 position-relative overflow-hidden">
-                    <div class="position-relative z-1 max-w-lg mx-auto">
-                        <i class="bi bi-envelope-paper fs-1 mb-3 d-block"></i>
-                        <h2 class="fw-bold mb-3">FitLife Yangiliklariga Obuna Bo'ling</h2>
-                        <p class="opacity-90 mb-4 fs-6">Haftalik bepul sport mashqlari va to'g'ri ovqatlanish bo'yicha ekspert maslahatlarini pochtangizga oling.</p>
-                        <form onsubmit="handleNewsletter(event)" class="row g-2 justify-content-center">
-                            <div class="col-md-8">
-                                <input type="email" class="form-control form-control-lg border-0 rounded-pill px-4" placeholder="Elektron pochtangizni kiriting..." required>
+            <!-- Testimonials Carousel -->
+            <div class="my-5 py-4">
+                <div class="text-center mb-5">
+                    <span class="badge badge-soft mb-2">Fikrlar</span>
+                    <h2 class="fw-bold">Mijozlarimiz FitLife Haqida</h2>
+                </div>
+
+                <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row justify-content-center">
+                                <div class="col-md-8">
+                                    <div class="glass-card p-5 text-center">
+                                        <div class="text-warning fs-5 mb-3">
+                                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                        </div>
+                                        <p class="fs-5 italic mb-4">"3 oy ichida 12 kg ozishga erishdim! Murabbiylarning shaxsiy yondashuvi va ovqatlanish rejasi juda ham sodda va tushunarli. FitLife bilan hayotim tubdan o'zgardi."</p>
+                                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" class="rounded-circle mb-2" width="60" height="60" alt="Client">
+                                        <h6 class="fw-bold mb-0">Malika Ahmedova</h6>
+                                        <small class="text-muted">Toshkent (Standard Pro a'zosi)</small>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-4">
-                                <button type="submit" class="btn btn-dark btn-lg rounded-pill w-100 fw-semibold">Obuna Bo'lish</button>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row justify-content-center">
+                                <div class="col-md-8">
+                                    <div class="glass-card p-5 text-center">
+                                        <div class="text-warning fs-5 mb-3">
+                                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                        </div>
+                                        <p class="fs-5 italic mb-4">"Ish tartibim sababli sport zalga borishga vaqtim yo'q edi. Uydagi mashqlar dasturi orqali qisqa vaqtda ajoyib press va energiya hosil qildim!"</p>
+                                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" class="rounded-circle mb-2" width="60" height="60" alt="Client">
+                                        <h6 class="fw-bold mb-0">Sardor Rahimov</h6>
+                                        <small class="text-muted">Samarqand (VIP A'zo)</small>
+                                    </div>
+                                </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                    </button>
                 </div>
             </div>
 
+            <!-- Newsletter -->
+            <div class="glass-card p-5 my-5 bg-gradient-custom text-white text-center rounded-20 position-relative overflow-hidden">
+                <div class="position-relative z-1">
+                    <h2 class="fw-bold mb-3">Xabar Va Chegirmalardan Boxabar Bo'ling</h2>
+                    <p class="mb-4 opacity-90 mx-auto" style="max-width: 500px;">Har haftalik bepul fitnes maslahatlar va maxsus aksiyalarni birinchilardan bo'lib oling.</p>
+                    <form onsubmit="handleNewsletter(event)" class="row g-2 justify-content-center max-w-lg mx-auto" style="max-width: 500px;">
+                        <div class="col-8">
+                            <input type="email" class="form-control form-control-lg rounded-pill border-0 px-4" placeholder="Email manzilingiz..." required>
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-dark btn-lg rounded-pill w-100 fw-bold">A'zo bo'lish</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </section>
 
+
         <!-- PAGE 2: DASTURLAR (PROGRAMS) -->
-        <section id="page-programs" class="page-section container py-5">
-            <div class="mb-4">
-                <span class="badge bg-light-blue text-primary px-3 py-2 rounded-pill fw-semibold">Fitnes Dasturlari</span>
-                <h2 class="fw-bold fs-2 mt-2">O'zingizga Mos Mashq Dasturini Toping</h2>
+        <section id="page-programs" class="page-section">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="fw-bold">Mashg'ulot Dasturlari</h2>
+                    <p class="text-muted">Sizning maqsadingiz va tayyorgarlik darajangizga mos mashqlar</p>
+                </div>
+                <div class="d-flex gap-2">
+                    <select class="form-select rounded-pill" id="difficultyFilter" onchange="filterProgramCards()">
+                        <option value="all">Barcha Darajalar</option>
+                        <option value="boshlangich">Boshlang'ich</option>
+                        <option value="orta">O'rta</option>
+                        <option value="pro">Professional</option>
+                    </select>
+                </div>
             </div>
 
             <div class="row g-4">
-                <!-- Filter Sidebar -->
+                <!-- Sidebar Filter -->
                 <div class="col-lg-3">
-                    <div class="glass-card p-4 sticky-top" style="top: 100px;">
-                        <h5 class="fw-bold mb-3"><i class="bi bi-funnel me-2"></i> Saralash</h5>
+                    <div class="glass-card p-4">
+                        <h5 class="fw-bold mb-3"><i class="bi bi-funnel me-2"></i> Filtrlash</h5>
                         
-                        <!-- Search Box -->
-                        <div class="mb-3">
-                            <label class="form-label small fw-semibold">Qidiruv</label>
-                            <input type="text" id="programSearch" class="form-control rounded-pill" placeholder="Dastur nomini yozing..." oninput="filterPrograms()">
+                        <div class="mb-4">
+                            <label class="form-label fw-medium">Kategoriya</label>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="catFilter" id="catAll" checked onclick="filterProgramCategory('all')">
+                                <label class="form-check-label" for="catAll">Barchasi</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="catFilter" id="catKardio" onclick="filterProgramCategory('kardio')">
+                                <label class="form-check-label" for="catKardio">Kardio Mashqlar</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="catFilter" id="catKuch" onclick="filterProgramCategory('kuch')">
+                                <label class="form-check-label" for="catKuch">Kuch Ishlatish</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="catFilter" id="catYoga" onclick="filterProgramCategory('yoga')">
+                                <label class="form-check-label" for="catYoga">Yoga & Pilates</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="catFilter" id="catOzish" onclick="filterProgramCategory('ozish')">
+                                <label class="form-check-label" for="catOzish">Ozish Dasturi</label>
+                            </div>
                         </div>
 
-                        <!-- Category Accordion -->
-                        <div class="accordion accordion-flush mb-3" id="filterAccordion">
+                        <!-- Level Accordion -->
+                        <div class="accordion accordion-flush" id="programAccordion">
                             <div class="accordion-item bg-transparent">
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button bg-transparent fw-semibold px-0" type="button" data-bs-toggle="collapse" data-bs-target="#catCollapse">
-                                        Kategoriya
+                                    <button class="accordion-button collapsed bg-transparent fw-bold ps-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne">
+                                        Ko'p Beriladigan Savollar
                                     </button>
                                 </h2>
-                                <div id="catCollapse" class="accordion-collapse collapse show" data-bs-parent="#filterAccordion">
-                                    <div class="accordion-body px-0 pt-2">
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input" type="checkbox" value="all" id="catAll" checked onchange="filterPrograms()">
-                                            <label class="form-check-label small" for="catAll">Barcha dasturlar</label>
-                                        </div>
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input" type="checkbox" value="kuch" id="catKuch" onchange="filterPrograms()">
-                                            <label class="form-check-label small" for="catKuch">Kuch-quvvat</label>
-                                        </div>
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input" type="checkbox" value="kardio" id="catKardio" onchange="filterPrograms()">
-                                            <label class="form-check-label small" for="catKardio">Kardio va HIIT</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="yoga" id="catYoga" onchange="filterPrograms()">
-                                            <label class="form-check-label small" for="catYoga">Yoga va Terapiya</label>
-                                        </div>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#programAccordion">
+                                    <div class="accordion-body px-0 text-muted small">
+                                        Dasturlarni istalgan vaqtda o'zgartirishingiz mumkin. Har bir mashq batafsil video qo'llanma bilan ta'minlangan.
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Difficulty Level -->
-                        <div class="mb-3">
-                            <label class="form-label small fw-semibold">Qiyinchilik Darajasi</label>
-                            <select id="diffSelect" class="form-select rounded-pill" onchange="filterPrograms()">
-                                <option value="all">Barcha darajalar</option>
-                                <option value="boshlangich">Boshlang'ich</option>
-                                <option value="orta">O'rta daraja</option>
-                                <option value="yuqori">Professional</option>
-                            </select>
-                        </div>
                     </div>
                 </div>
 
-                <!-- Program Grid -->
+                <!-- Program Cards Grid -->
                 <div class="col-lg-9">
                     <div class="row g-4" id="programsGrid">
                         <!-- Program Card 1 -->
-                        <div class="col-md-6 program-card" data-category="kuch" data-diff="orta">
+                        <div class="col-md-6 program-card-item" data-category="kardio" data-level="boshlangich">
                             <div class="glass-card h-100 overflow-hidden d-flex flex-column">
                                 <div class="position-relative">
-                                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=600&q=80" class="w-100" style="height: 200px; object-fit: cover;" alt="Dastur">
-                                    <span class="badge bg-primary position-absolute top-0 end-0 m-3 rounded-pill">O'rta daraja</span>
+                                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=600&auto=format&fit=crop" class="w-100" style="height: 200px; object-fit: cover;" alt="Cardio">
+                                    <span class="position-absolute top-0 end-0 m-3 badge bg-success rounded-pill">Boshlang'ich</span>
                                 </div>
-                                <div class="p-4 d-flex flex-column flex-grow-1">
-                                    <h5 class="fw-bold">Intensiv Mushak Massasi</h5>
-                                    <p class="text-muted small">4 haftalik intensiv trenirovkalar to'plami. Tana tuzilishini yaxshilash va kuch yig'ish uchun.</p>
-                                    <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
-                                        <span class="small text-muted"><i class="bi bi-clock me-1"></i> 4 Haftalikka Mo'ljallangan</span>
-                                        <button class="btn btn-sm btn-gradient" onclick="openProgramModal('Intensiv Mushak Massasi', '4 Haftalik intensiv trenirovka va maxsus protokollar.')">Batafsil</button>
+                                <div class="p-4 d-flex flex-column flex-grow-1 justify-content-between">
+                                    <div>
+                                        <div class="d-flex align-items-center gap-3 text-muted small mb-2">
+                                            <span><i class="bi bi-clock me-1"></i> 30 daqiqa/kun</span>
+                                            <span><i class="bi bi-fire me-1"></i> 400 kcal</span>
+                                        </div>
+                                        <h5 class="fw-bold mb-2">Intensiv Kardio & Ozish</h5>
+                                        <p class="text-muted small">Yurak tizimini mustahkamlash va ortiqcha vazndan xalos bo'lish uchun ideal dastur.</p>
                                     </div>
+                                    <button class="btn btn-outline-gradient w-100 mt-3" onclick="openProgramModal('Intensiv Kardio & Ozish', '4 hafta', '12 ta video mashq', 'Malika Ahmedova')">
+                                        Batafsil Ko'rish
+                                    </button>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Program Card 2 -->
-                        <div class="col-md-6 program-card" data-category="kardio" data-diff="boshlangich">
+                        <div class="col-md-6 program-card-item" data-category="kuch" data-level="pro">
                             <div class="glass-card h-100 overflow-hidden d-flex flex-column">
                                 <div class="position-relative">
-                                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80" class="w-100" style="height: 200px; object-fit: cover;" alt="Dastur">
-                                    <span class="badge bg-success position-absolute top-0 end-0 m-3 rounded-pill">Boshlang'ich</span>
+                                    <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=600&auto=format&fit=crop" class="w-100" style="height: 200px; object-fit: cover;" alt="Power">
+                                    <span class="position-absolute top-0 end-0 m-3 badge bg-danger rounded-pill">Professional</span>
                                 </div>
-                                <div class="p-4 d-flex flex-column flex-grow-1">
-                                    <h5 class="fw-bold">Fat Burn HIIT Kardio</h5>
-                                    <p class="text-muted small">Ortiqcha vazndan tez va samarali xalos bo'lish uchun kunlik 30 daqiqalik yuqori temp mashqlari.</p>
-                                    <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
-                                        <span class="small text-muted"><i class="bi bi-clock me-1"></i> 3 Haftalik Dastur</span>
-                                        <button class="btn btn-sm btn-gradient" onclick="openProgramModal('Fat Burn HIIT Kardio', 'Vazn yo\'qotish uchun mo\'ljallangan samarali kardio tizimi.')">Batafsil</button>
+                                <div class="p-4 d-flex flex-column flex-grow-1 justify-content-between">
+                                    <div>
+                                        <div class="d-flex align-items-center gap-3 text-muted small mb-2">
+                                            <span><i class="bi bi-clock me-1"></i> 60 daqiqa/kun</span>
+                                            <span><i class="bi bi-fire me-1"></i> 750 kcal</span>
+                                        </div>
+                                        <h5 class="fw-bold mb-2">Mushak Massasini Oshirish</h5>
+                                        <p class="text-muted small">Og'ir shtangalar va trenajyorlarda kuch oshirish va mushak qurish intensiv kursi.</p>
                                     </div>
+                                    <button class="btn btn-outline-gradient w-100 mt-3" onclick="openProgramModal('Mushak Massasini Oshirish', '8 hafta', '24 ta video mashq', 'Jasur Rustamov')">
+                                        Batafsil Ko'rish
+                                    </button>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Program Card 3 -->
-                        <div class="col-md-6 program-card" data-category="yoga" data-diff="boshlangich">
+                        <div class="col-md-6 program-card-item" data-category="yoga" data-level="orta">
                             <div class="glass-card h-100 overflow-hidden d-flex flex-column">
                                 <div class="position-relative">
-                                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600&q=80" class="w-100" style="height: 200px; object-fit: cover;" alt="Dastur">
-                                    <span class="badge bg-info text-dark position-absolute top-0 end-0 m-3 rounded-pill">Barchaga Mos</span>
+                                    <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=600&auto=format&fit=crop" class="w-100" style="height: 200px; object-fit: cover;" alt="Yoga">
+                                    <span class="position-absolute top-0 end-0 m-3 badge bg-warning text-dark rounded-pill">O'rta</span>
                                 </div>
-                                <div class="p-4 d-flex flex-column flex-grow-1">
-                                    <h5 class="fw-bold">Egiluvchanlik va Umurtqa Sog'lig'i</h5>
-                                    <p class="text-muted small">Umurtqa pog'onasidagi og'riqlarni kamaytirish, gavda holatini (postura) to'g'rilash va cho'zilish mashqlari.</p>
-                                    <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
-                                        <span class="small text-muted"><i class="bi bi-clock me-1"></i> 2 Haftalik Kurs</span>
-                                        <button class="btn btn-sm btn-gradient" onclick="openProgramModal('Egiluvchanlik va Umurtqa Sog\'lig\'i', 'Umurtqa pog\'onasini tiklash va qomatni to\'g'rilash kurslari.')">Batafsil</button>
+                                <div class="p-4 d-flex flex-column flex-grow-1 justify-content-between">
+                                    <div>
+                                        <div class="d-flex align-items-center gap-3 text-muted small mb-2">
+                                            <span><i class="bi bi-clock me-1"></i> 45 daqiqa/kun</span>
+                                            <span><i class="bi bi-fire me-1"></i> 250 kcal</span>
+                                        </div>
+                                        <h5 class="fw-bold mb-2">Garmoniya va Yoga Balansi</h5>
+                                        <p class="text-muted small">Tana moslashuvchanligini oshirish va stressdan xalos bo'lish usullari.</p>
                                     </div>
+                                    <button class="btn btn-outline-gradient w-100 mt-3" onclick="openProgramModal('Garmoniya va Yoga Balansi', '6 hafta', '18 ta video mashq', 'Elena Kim')">
+                                        Batafsil Ko'rish
+                                    </button>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Program Card 4 -->
-                        <div class="col-md-6 program-card" data-category="kuch" data-diff="yuqori">
+                        <div class="col-md-6 program-card-item" data-category="ozish" data-level="boshlangich">
                             <div class="glass-card h-100 overflow-hidden d-flex flex-column">
                                 <div class="position-relative">
-                                    <img src="https://images.unsplash.com/photo-1517931524326-bdd55a541177?auto=format&fit=crop&w=600&q=80" class="w-100" style="height: 200px; object-fit: cover;" alt="Dastur">
-                                    <span class="badge bg-danger position-absolute top-0 end-0 m-3 rounded-pill">Professional</span>
+                                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=600&auto=format&fit=crop" class="w-100" style="height: 200px; object-fit: cover;" alt="Fitness">
+                                    <span class="position-absolute top-0 end-0 m-3 badge bg-success rounded-pill">Boshlang'ich</span>
                                 </div>
-                                <div class="p-4 d-flex flex-column flex-grow-1">
-                                    <h5 class="fw-bold">CrossFit Pro Athletics</h5>
-                                    <p class="text-muted small">Yuqori chidamlilik va professional darajadagi og'ir atletika kompleks mashqlar to'plami.</p>
-                                    <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
-                                        <span class="small text-muted"><i class="bi bi-clock me-1"></i> 6 Haftalik Dastur</span>
-                                        <button class="btn btn-sm btn-gradient" onclick="openProgramModal('CrossFit Pro Athletics', 'Tajribali sportchilar uchun mo\'ljallangan murakkab krossfit mashqlari.')">Batafsil</button>
+                                <div class="p-4 d-flex flex-column flex-grow-1 justify-content-between">
+                                    <div>
+                                        <div class="d-flex align-items-center gap-3 text-muted small mb-2">
+                                            <span><i class="bi bi-clock me-1"></i> 40 daqiqa/kun</span>
+                                            <span><i class="bi bi-fire me-1"></i> 550 kcal</span>
+                                        </div>
+                                        <h5 class="fw-bold mb-2">Express Ozish Dasturi</h5>
+                                        <p class="text-muted small">1 oy davomida maxsus dietologik taomnoma bilan birgalikdagi fitnes kompleks.</p>
                                     </div>
+                                    <button class="btn btn-outline-gradient w-100 mt-3" onclick="openProgramModal('Express Ozish Dasturi', '4 hafta', '16 ta video mashq', 'Aziza Karimova')">
+                                        Batafsil Ko'rish
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Pagination -->
-                    <nav class="mt-5">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item disabled"><a class="page-link rounded-circle me-1" href="#"><i class="bi bi-chevron-left"></i></a></li>
-                            <li class="page-item active"><a class="page-link rounded-circle me-1" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link rounded-circle me-1" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link rounded-circle" href="#"><i class="bi bi-chevron-right"></i></a></li>
+                    <nav class="mt-4 d-flex justify-content-center">
+                        <ul class="pagination">
+                            <li class="page-item disabled"><a class="page-link rounded-start-pill" href="#">Ortga</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link rounded-end-pill" href="#">Oldinga</a></li>
                         </ul>
                     </nav>
                 </div>
             </div>
         </section>
 
+
         <!-- PAGE 3: MURABBIYLAR (TRAINERS) -->
-        <section id="page-trainers" class="page-section container py-5">
-            <div class="text-center max-w-lg mx-auto mb-5">
-                <span class="badge bg-light-green text-success px-3 py-2 rounded-pill fw-semibold">Sertifikatlangan Ekspertlar</span>
-                <h2 class="fw-bold fs-2 mt-2">Professional Murabbiylarimiz</h2>
-                <p class="text-muted">Sizning maqsadlaringizga erishishingizda ko'maklashuvchi tajribali murabbiylar ro'yxati.</p>
+        <section id="page-trainers" class="page-section">
+            <div class="text-center mb-5">
+                <span class="badge badge-soft mb-2">Sohaning Eng Yaxshilari</span>
+                <h2 class="fw-bold mb-3">Professional Murabbiylarimiz</h2>
+                <p class="text-muted mx-auto" style="max-width: 600px;">Har bir murabbiyimiz xalqaro sertifikatga va ko'p yillik tajribaga ega.</p>
             </div>
 
+            <!-- Trainer Grid -->
             <div class="row g-4">
                 <!-- Trainer 1 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="glass-card text-center overflow-hidden h-100">
-                        <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?auto=format&fit=crop&w=600&q=80" class="w-100 trainer-img" alt="Murabbiy">
-                        <div class="p-4">
-                            <h5 class="fw-bold mb-1">Jasur Alimov</h5>
-                            <p class="text-primary fw-medium small mb-2">Bosh Murabbiy / Fitness & Powerlifting</p>
-                            <div class="d-flex justify-content-center align-items-center gap-1 text-warning mb-3">
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <span class="text-dark small ms-1 fw-bold">4.9 (120+ sharh)</span>
+                <div class="col-lg-3 col-md-6">
+                    <div class="glass-card h-100 overflow-hidden d-flex flex-column justify-content-between">
+                        <div>
+                            <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=400&auto=format&fit=crop" class="trainer-img w-100" alt="Trainer">
+                            <div class="p-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="badge badge-soft-success">Crossfit & Kuch</span>
+                                    <div class="text-warning small"><i class="bi bi-star-fill"></i> 4.9 (120)</div>
+                                </div>
+                                <h5 class="fw-bold mb-1">Jasur Rustamov</h5>
+                                <p class="text-muted small mb-3">7 yillik tajriba</p>
+                                <p class="text-muted small">Powerlifting bo'yicha sport ustasi, poytaxt chempioni.</p>
                             </div>
-                            <p class="text-muted small">7 yillik tajribaga ega sertifikatlangan bodibilding va kuch mashqlari bo'yicha mutaxassis.</p>
-                            <button class="btn btn-outline-custom btn-sm w-100" onclick="openTrainerModal('Jasur Alimov', 'Bosh Murabbiy / Fitness', '7 yillik tajriba')">
-                                Band qilish <i class="bi bi-calendar-plus ms-1"></i>
+                        </div>
+                        <div class="p-4 pt-0">
+                            <button class="btn btn-gradient w-100" onclick="openTrainerModal('Jasur Rustamov', 'Crossfit & Kuch', '7 yil', '4.9')">
+                                <i class="bi bi-calendar-check me-1"></i> Band Qilish
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Trainer 2 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="glass-card text-center overflow-hidden h-100">
-                        <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80" class="w-100 trainer-img" alt="Murabbiy">
-                        <div class="p-4">
-                            <h5 class="fw-bold mb-1">Malika Karimova</h5>
-                            <p class="text-success fw-medium small mb-2">Yoga va Pilates Bo'yicha Mutaxassis</p>
-                            <div class="d-flex justify-content-center align-items-center gap-1 text-warning mb-3">
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-half"></i>
-                                <span class="text-dark small ms-1 fw-bold">4.8 (95+ sharh)</span>
+                <div class="col-lg-3 col-md-6">
+                    <div class="glass-card h-100 overflow-hidden d-flex flex-column justify-content-between">
+                        <div>
+                            <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=400&auto=format&fit=crop" class="trainer-img w-100" alt="Trainer">
+                            <div class="p-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="badge badge-soft">Kardio & Ozish</span>
+                                    <div class="text-warning small"><i class="bi bi-star-fill"></i> 4.8 (95)</div>
+                                </div>
+                                <h5 class="fw-bold mb-1">Aziza Karimova</h5>
+                                <p class="text-muted small mb-3">5 yillik tajriba</p>
+                                <p class="text-muted small">Sertifikatlangan fitnes nutritsiolog va aerobika bo'yicha trener.</p>
                             </div>
-                            <p class="text-muted small">Xalqaro Yoga Aliansi a'zosi. Tana egiluvchanligi va nafas mashqlari bo'yicha murabbiy.</p>
-                            <button class="btn btn-outline-custom btn-sm w-100" onclick="openTrainerModal('Malika Karimova', 'Yoga va Pilates', '5 yillik tajriba')">
-                                Band qilish <i class="bi bi-calendar-plus ms-1"></i>
+                        </div>
+                        <div class="p-4 pt-0">
+                            <button class="btn btn-gradient w-100" onclick="openTrainerModal('Aziza Karimova', 'Kardio & Ozish', '5 yil', '4.8')">
+                                <i class="bi bi-calendar-check me-1"></i> Band Qilish
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Trainer 3 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="glass-card text-center overflow-hidden h-100">
-                        <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=600&q=80" class="w-100 trainer-img" alt="Murabbiy">
-                        <div class="p-4">
-                            <h5 class="fw-bold mb-1">Sardor Raximov</h5>
-                            <p class="text-primary fw-medium small mb-2">Kardio va HIIT Murabbiyi</p>
-                            <div class="d-flex justify-content-center align-items-center gap-1 text-warning mb-3">
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <span class="text-dark small ms-1 fw-bold">5.0 (150+ sharh)</span>
+                <div class="col-lg-3 col-md-6">
+                    <div class="glass-card h-100 overflow-hidden d-flex flex-column justify-content-between">
+                        <div>
+                            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=400&auto=format&fit=crop" class="trainer-img w-100" alt="Trainer">
+                            <div class="p-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="badge badge-soft-success">Yoga & Stretching</span>
+                                    <div class="text-warning small"><i class="bi bi-star-fill"></i> 5.0 (140)</div>
+                                </div>
+                                <h5 class="fw-bold mb-1">Elena Kim</h5>
+                                <p class="text-muted small mb-3">8 yillik tajriba</p>
+                                <p class="text-muted small">Hindistonda malaka oshirgan xalqaro Yoga Master.</p>
                             </div>
-                            <p class="text-muted small">Tezkor vazn yo'qotish va umumiy dayanuvchanlikni oshirish bo'yicha intensiv mashqlar ustozi.</p>
-                            <button class="btn btn-outline-custom btn-sm w-100" onclick="openTrainerModal('Sardor Raximov', 'Kardio va HIIT', '6 yillik tajriba')">
-                                Band qilish <i class="bi bi-calendar-plus ms-1"></i>
+                        </div>
+                        <div class="p-4 pt-0">
+                            <button class="btn btn-gradient w-100" onclick="openTrainerModal('Elena Kim', 'Yoga & Stretching', '8 yil', '5.0')">
+                                <i class="bi bi-calendar-check me-1"></i> Band Qilish
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trainer 4 -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="glass-card h-100 overflow-hidden d-flex flex-column justify-content-between">
+                        <div>
+                            <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=400&auto=format&fit=crop" class="trainer-img w-100" alt="Trainer">
+                            <div class="p-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="badge badge-soft">Boks & Funksional</span>
+                                    <div class="text-warning small"><i class="bi bi-star-fill"></i> 4.9 (88)</div>
+                                </div>
+                                <h5 class="fw-bold mb-1">Bekzod Alimov</h5>
+                                <p class="text-muted small mb-3">6 yillik tajriba</p>
+                                <p class="text-muted small">Kikboksing va funksional mashqlar bo'yicha mutaxassis.</p>
+                            </div>
+                        </div>
+                        <div class="p-4 pt-0">
+                            <button class="btn btn-gradient w-100" onclick="openTrainerModal('Bekzod Alimov', 'Boks & Funksional', '6 yil', '4.9')">
+                                <i class="bi bi-calendar-check me-1"></i> Band Qilish
                             </button>
                         </div>
                     </div>
@@ -636,190 +727,211 @@
             </div>
         </section>
 
+
         <!-- PAGE 4: BLOG -->
-        <section id="page-blog" class="page-section container py-5">
-            <div class="mb-5">
-                <span class="badge bg-light-purple text-primary px-3 py-2 rounded-pill fw-semibold">FitLife Blog</span>
-                <h2 class="fw-bold fs-2 mt-2">Sport va Salomatlik Maqolalari</h2>
+        <section id="page-blog" class="page-section">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="fw-bold">Fitnes va Salomatlik Blogi</h2>
+                    <p class="text-muted">Foydali maqolalar, to'g'ri ovqatlanish sirlari va fitnes maslahatlar</p>
+                </div>
             </div>
 
             <!-- Featured Post -->
-            <div class="glass-card overflow-hidden mb-5">
-                <div class="row g-0 align-items-center">
+            <div class="glass-card p-0 overflow-hidden mb-5">
+                <div class="row g-0">
                     <div class="col-lg-6">
-                        <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=800&q=80" class="w-100 h-100" style="object-fit: cover; min-height: 300px;" alt="Blog Image">
+                        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=800&auto=format&fit=crop" class="w-100 h-100" style="object-fit: cover; min-height: 300px;" alt="Featured">
                     </div>
-                    <div class="col-lg-6 p-4 p-md-5">
-                        <span class="badge bg-success mb-2">To'g'ri Ovqatlanish</span>
-                        <h3 class="fw-bold text-dark">Kunlik Kaloriyani Qanday To'g'ri Hisoblash Va Vaznni Nazorat Qilish Mumkin?</h3>
-                        <p class="text-muted">Salomatlik va maqsadga qarab oqsillar, yog'lar va uglevodlar nisbatini to'g'ri taqsimlash bo'yicha eng muhim maslahatlar.</p>
-                        <div class="d-flex align-items-center gap-3 pt-3 border-top">
-                            <i class="bi bi-person-circle fs-4 text-primary"></i>
-                            <div>
-                                <h6 class="mb-0 fw-bold">Dr. Nilufar Usmanova</h6>
-                                <small class="text-muted">24 Sentyabr, 2026 • 5 min mutolaa</small>
+                    <div class="col-lg-6 p-4 p-md-5 d-flex flex-column justify-content-between">
+                        <div>
+                            <span class="badge badge-soft mb-2">Hafta Maqolasi</span>
+                            <h3 class="fw-bold mb-3">To'g'ri Ovqatlanish va Metabolizmni Tezlashtirish Usullari</h3>
+                            <p class="text-muted">Metabolizm — bu tanamizning energiyani sarflash tezligi. Uni qanday qilib tabiiy yo'llar bilan oshirish va tezroq ozish mumkinligi haqida batafsil ma'lumot bering...</p>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between pt-3 border-top">
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="bi bi-clock text-muted"></i> <small class="text-muted">5 daqiqa o'qish</small>
                             </div>
+                            <button class="btn btn-gradient" onclick="openBlogModal('To\'g\'ri Ovqatlanish va Metabolizmni Tezlashtirish Usullari')">O'qish <i class="bi bi-arrow-right"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Grid of Recent Posts -->
+            <!-- Blog Grid -->
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="glass-card h-100 overflow-hidden d-flex flex-column">
-                        <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80" class="w-100" style="height: 180px; object-fit: cover;" alt="Blog">
-                        <div class="p-4 d-flex flex-column flex-grow-1">
-                            <span class="badge bg-light-blue text-primary w-auto align-self-start mb-2">Fitnes</span>
-                            <h5 class="fw-bold">Ertalabki Mashqlarning Organizmga Ta'siri</h5>
-                            <p class="text-muted small">Nega ertangi mashqlar kun davomida energiya darajasini oshiradi?</p>
-                            <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center small text-muted">
-                                <span>18 Sentyabr, 2026</span>
-                                <a href="#" class="text-primary fw-semibold text-decoration-none" onclick="openBlogModal('Ertalabki Mashqlarning Organizmga Ta\'siri'); return false;">O'qish <i class="bi bi-arrow-right"></i></a>
+                    <div class="glass-card h-100 overflow-hidden d-flex flex-column justify-content-between">
+                        <div>
+                            <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=400&auto=format&fit=crop" class="blog-img w-100" alt="Blog">
+                            <div class="p-4">
+                                <span class="badge badge-soft-success mb-2">Mashqlar</span>
+                                <h5 class="fw-bold mb-2">Uydan Chiqmay Turib Shug'ullanish Mumkinmi?</h5>
+                                <p class="text-muted small">Trenajyorsiz va qo'shimcha anjomlarsiz samarali mashg'ulotlar to'plami.</p>
                             </div>
+                        </div>
+                        <div class="p-4 pt-0">
+                            <button class="btn btn-outline-gradient w-100" onclick="openBlogModal('Uydan Chiqmay Turib Shug\'ullanish Mumkinmi?')">Batafsil</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-4">
-                    <div class="glass-card h-100 overflow-hidden d-flex flex-column">
-                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600&q=80" class="w-100" style="height: 180px; object-fit: cover;" alt="Blog">
-                        <div class="p-4 d-flex flex-column flex-grow-1">
-                            <span class="badge bg-light-green text-success w-auto align-self-start mb-2">Yoga & Stress</span>
-                            <h5 class="fw-bold">Stressni Yengish Yollari Va Meditatsiya</h5>
-                            <p class="text-muted small">Ruh va tana muvozanatini saqlash uchun 10 daqiqalik tinchlantiruvchi mashqlar.</p>
-                            <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center small text-muted">
-                                <span>12 Sentyabr, 2026</span>
-                                <a href="#" class="text-primary fw-semibold text-decoration-none" onclick="openBlogModal('Stressni Yengish Yollari Va Meditatsiya'); return false;">O'qish <i class="bi bi-arrow-right"></i></a>
+                    <div class="glass-card h-100 overflow-hidden d-flex flex-column justify-content-between">
+                        <div>
+                            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=400&auto=format&fit=crop" class="blog-img w-100" alt="Blog">
+                            <div class="p-4">
+                                <span class="badge badge-soft mb-2">Yoga & Stress</span>
+                                <h5 class="fw-bold mb-2">Ertalabki Yoga va Uning Ruhiyatga Ta'siri</h5>
+                                <p class="text-muted small">Kunni tetik va yuqori kayfiyatda boshlash uchun 10 daqiqalik yengil mashqlar.</p>
                             </div>
+                        </div>
+                        <div class="p-4 pt-0">
+                            <button class="btn btn-outline-gradient w-100" onclick="openBlogModal('Ertalabki Yoga va Uning Ruhiyatga Ta\'siri')">Batafsil</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-4">
-                    <div class="glass-card h-100 overflow-hidden d-flex flex-column">
-                        <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80" class="w-100" style="height: 180px; object-fit: cover;" alt="Blog">
-                        <div class="p-4 d-flex flex-column flex-grow-1">
-                            <span class="badge bg-light-purple text-primary w-auto align-self-start mb-2">Kardio</span>
-                            <h5 class="fw-bold">Yugurish Paytida To'g'ri Nafas Olish</h5>
-                            <p class="text-muted small">O'pka va yurakka ortiqcha yuklama bermasdan uzoq masofaga yugurish usullari.</p>
-                            <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center small text-muted">
-                                <span>05 Sentyabr, 2026</span>
-                                <a href="#" class="text-primary fw-semibold text-decoration-none" onclick="openBlogModal('Yugurish Paytida To\'g\'ri Nafas Olish'); return false;">O'qish <i class="bi bi-arrow-right"></i></a>
+                    <div class="glass-card h-100 overflow-hidden d-flex flex-column justify-content-between">
+                        <div>
+                            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=400&auto=format&fit=crop" class="blog-img w-100" alt="Blog">
+                            <div class="p-4">
+                                <span class="badge badge-soft-success mb-2">Parhez</span>
+                                <h5 class="fw-bold mb-2">Protein: Qancha va Qachon Iste'mol Qilish Kerak?</h5>
+                                <p class="text-muted small">Mushak tiklanishi uchun zarur bo'lgan oqsil miqdorini to'g'ri hisoblash.</p>
                             </div>
+                        </div>
+                        <div class="p-4 pt-0">
+                            <button class="btn btn-outline-gradient w-100" onclick="openBlogModal('Protein: Qancha va Qachon Iste\'mol Qilish Kerak?')">Batafsil</button>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+
         <!-- PAGE 5: BOG'LANISH (CONTACT) -->
-        <section id="page-contact" class="page-section container py-5">
-            <div class="text-center max-w-lg mx-auto mb-5">
-                <span class="badge bg-light-blue text-primary px-3 py-2 rounded-pill fw-semibold">Biz Bilan Aloqa</span>
-                <h2 class="fw-bold fs-2 mt-2">Savollaringiz Bormi? Yozib Qoldiring</h2>
-                <p class="text-muted">Menejerlarimiz 15 daqiqa ichida siz bilan bog'lanishadi.</p>
+        <section id="page-contact" class="page-section">
+            <div class="text-center mb-5">
+                <span class="badge badge-soft mb-2">Aloqa</span>
+                <h2 class="fw-bold mb-3">Biz Bilan Bog'laning</h2>
+                <p class="text-muted">Savollaringiz bormi? Mutaxassislarimiz sizga yordam berishga tayyor.</p>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <!-- Contact Info Cards -->
+                <div class="col-md-3">
+                    <div class="glass-card p-4 text-center h-100">
+                        <div class="bg-primary text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                            <i class="bi bi-telephone fs-4"></i>
+                        </div>
+                        <h6 class="fw-bold">Telefon</h6>
+                        <p class="text-muted small mb-0">+998 (71) 200-00-20</p>
+                        <p class="text-muted small">+998 (90) 123-45-67</p>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="glass-card p-4 text-center h-100">
+                        <div class="bg-success text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                            <i class="bi bi-telegram fs-4"></i>
+                        </div>
+                        <h6 class="fw-bold">Telegram Bot</h6>
+                        <p class="text-muted small mb-0">@fitlife_support_bot</p>
+                        <p class="text-muted small">24/7 Avto javob</p>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="glass-card p-4 text-center h-100">
+                        <div class="bg-warning text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                            <i class="bi bi-geo-alt fs-4"></i>
+                        </div>
+                        <h6 class="fw-bold">Manzil</h6>
+                        <p class="text-muted small mb-0">Toshkent sh., Amir Temur ko'chasi, 108-uy</p>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="glass-card p-4 text-center h-100">
+                        <div class="bg-danger text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                            <i class="bi bi-clock fs-4"></i>
+                        </div>
+                        <h6 class="fw-bold">Ish Vaqti</h6>
+                        <p class="text-muted small mb-0">Dushanba - Shanba</p>
+                        <p class="text-muted small">08:00 - 22:00</p>
+                    </div>
+                </div>
             </div>
 
             <div class="row g-4">
-                <!-- Contact Form -->
-                <div class="col-lg-7">
+                <!-- Form -->
+                <div class="col-lg-6">
                     <div class="glass-card p-4 p-md-5">
+                        <h4 class="fw-bold mb-4">Xabar Yuborish</h4>
                         <form onsubmit="handleContactSubmit(event)">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control rounded-4" id="cName" placeholder="Ismingiz" required>
-                                        <label for="cName">Ismingiz</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating mb-3">
-                                        <input type="tel" class="form-control rounded-4" id="cPhone" placeholder="+998 90 123 45 67" required>
-                                        <label for="cPhone">Telefon raqamingiz</label>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control rounded-4" id="cEmail" placeholder="Email pochtangiz">
-                                <label for="cEmail">Elektron Pochta (ixtiyoriy)</label>
+                                <input type="text" class="form-control rounded-16" id="floatingName" placeholder="Ismingiz" required>
+                                <label for="floatingName">Ismingiz</label>
                             </div>
-
-                            <div class="form-floating mb-4">
-                                <textarea class="form-control rounded-4" placeholder="Xabaringiz" id="cMessage" style="height: 140px" required></textarea>
-                                <label for="cMessage">Xabaringizni yozing...</label>
+                            <div class="form-floating mb-3">
+                                <input type="tel" class="form-control rounded-16" id="floatingPhone" placeholder="Telefon raqam" required>
+                                <label for="floatingPhone">Telefon Raqamingiz</label>
                             </div>
-
-                            <button type="submit" class="btn btn-gradient btn-lg w-100 fs-6">
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control rounded-16" placeholder="Xabaringiz" id="floatingMessage" style="height: 120px" required></textarea>
+                                <label for="floatingMessage">Xabaringiz matni...</label>
+                            </div>
+                            <button type="submit" class="btn btn-gradient w-100 py-3">
                                 <i class="bi bi-send me-2"></i> Xabarni Yuborish
                             </button>
                         </form>
                     </div>
                 </div>
 
-                <!-- Info Cards & Map Placeholder -->
-                <div class="col-lg-5">
-                    <div class="glass-card p-4 mb-4">
-                        <h5 class="fw-bold mb-4">Aloqa Ma'lumotlari</h5>
-                        <div class="d-flex align-items-center gap-3 mb-3">
-                            <div class="bg-light-blue text-primary p-3 rounded-circle"><i class="bi bi-geo-alt fs-4"></i></div>
-                            <div>
-                                <h6 class="mb-0 fw-bold">Manzil:</h6>
-                                <p class="text-muted small mb-0">Toshkent sh., Chilonzor tumani, Bunyodkor ko'chasi 15-uy</p>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center gap-3 mb-3">
-                            <div class="bg-light-green text-success p-3 rounded-circle"><i class="bi bi-telephone fs-4"></i></div>
-                            <div>
-                                <h6 class="mb-0 fw-bold">Telefon:</h6>
-                                <p class="text-muted small mb-0">+998 (71) 200-00-22 / +998 (90) 123-45-67</p>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="bg-light-purple text-primary p-3 rounded-circle"><i class="bi bi-clock fs-4"></i></div>
-                            <div>
-                                <h6 class="mb-0 fw-bold">Ish Vaqti:</h6>
-                                <p class="text-muted small mb-0">Dushanba - Yakshanba: 06:00 - 23:00</p>
+                <!-- Google Maps Placeholder & FAQ -->
+                <div class="col-lg-6">
+                    <!-- Map Placeholder Card -->
+                    <div class="glass-card p-3 mb-4 rounded-20 overflow-hidden">
+                        <div class="bg-light rounded-16 d-flex align-items-center justify-content-center text-center p-5 position-relative" style="height: 220px; background: url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=800&auto=format&fit=crop') center/cover;">
+                            <div class="bg-white p-3 rounded-16 shadow">
+                                <i class="bi bi-geo-alt-fill text-danger fs-3"></i>
+                                <h6 class="fw-bold mb-0">FitLife Bosh Offisi</h6>
+                                <small class="text-muted">Toshkent, O'zbekiston</small>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Map Placeholder -->
-                    <div class="glass-card overflow-hidden rounded-20 p-2 text-center" style="height: 200px; background: #e2e8f0;">
-                        <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center border border-dashed rounded-20 text-muted">
-                            <i class="bi bi-map fs-1 text-primary mb-2"></i>
-                            <span class="fw-semibold">Interaktiv Xarita (Toshkent, FitLife Markazi)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ Accordion -->
-            <div class="mt-5 pt-4">
-                <h3 class="fw-bold text-center mb-4">Ko'p Beriladigan Savollar (FAQ)</h3>
-                <div class="accordion glass-card p-2 rounded-20" id="faqAccordion">
-                    <div class="accordion-item border-0 bg-transparent">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button rounded-20 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                                FitLife mobil ilovasi bormi?
-                            </button>
-                        </h2>
-                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body text-muted">
-                                Ha, ilovamiz iOS va Android platformalarida mavjud. Saytimiz orqali a'zo bo'lgach, barcha ma'lumotlar mobil ilovangizda avtomatik sinxronlanadi.
+                    <!-- FAQ Accordion -->
+                    <div class="glass-card p-4">
+                        <h5 class="fw-bold mb-3"><i class="bi bi-question-circle me-2"></i> Ko'p Beriladigan Savollar</h5>
+                        <div class="accordion accordion-flush" id="faqAccordion">
+                            <div class="accordion-item bg-transparent">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed bg-transparent fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                        Sinov darsi bepulmi?
+                                    </button>
+                                </h2>
+                                <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body text-muted small">
+                                        Ha, ro'yxatdan o'tganingizdan so'ng birinchi 3 kunlik mashg'ulotlar mutlaqo bepul taqdim etiladi.
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item border-0 bg-transparent">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed rounded-20 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                Obuna to'lovini bekor qilish mumkinmi?
-                            </button>
-                        </h2>
-                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body text-muted">
-                                Ha, istalgan vaqtda shaxsiy kabinetingiz orqali obunani bekor qilishingiz mumkin. Ortda qolgan kunlar uchun pulingiz qaytariladi.
+
+                            <div class="accordion-item bg-transparent">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed bg-transparent fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                        To'lov usullari qanday?
+                                    </button>
+                                </h2>
+                                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body text-muted small">
+                                        Click, Payme, Uzum Bank va xalqaro Visa/Mastercard kartalari orqali to'lov qilishingiz mumkin.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -829,192 +941,204 @@
 
     </main>
 
+
     <!-- FOOTER -->
-    <footer class="bg-dark text-white pt-5 pb-4 mt-auto">
+    <footer class="glass-nav mt-5 py-5 border-top">
         <div class="container">
-            <div class="row g-4 mb-4">
+            <div class="row g-4">
                 <div class="col-lg-4">
-                    <a class="d-flex align-items-center fw-bold fs-3 text-gradient mb-3 text-decoration-none" href="#">
-                        <i class="bi bi-lightning-charge-fill me-2 text-primary"></i>FitLife
+                    <a class="navbar-brand d-flex align-items-center gap-2 mb-3" href="#">
+                        <div class="bg-gradient-custom text-white rounded-3 p-2 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                            <i class="bi bi-lightning-charge-fill fs-5"></i>
+                        </div>
+                        <span class="fw-bold fs-4 text-dark">Fit<span class="text-gradient">Life</span></span>
                     </a>
-                    <p class="text-white-50 small mb-3">Kelajak sport va salomatlik platformasi. Sog'lom hayot sari birgalikda birinchi qadamni tashlang!</p>
+                    <p class="text-muted small mb-4">Sog'lom turmush tarzi va mukammal qomatga erishish yo'lidagi eng ishonchli hamrohingiz.</p>
                     <div class="d-flex gap-3">
-                        <a href="#" class="text-white-50 fs-5"><i class="bi bi-telegram"></i></a>
-                        <a href="#" class="text-white-50 fs-5"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="text-white-50 fs-5"><i class="bi bi-youtube"></i></a>
-                        <a href="#" class="text-white-50 fs-5"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-secondary fs-5"><i class="bi bi-telegram"></i></a>
+                        <a href="#" class="text-secondary fs-5"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-secondary fs-5"><i class="bi bi-youtube"></i></a>
+                        <a href="#" class="text-secondary fs-5"><i class="bi bi-facebook"></i></a>
                     </div>
                 </div>
-                <div class="col-6 col-lg-2">
-                    <h6 class="fw-bold mb-3 text-white">Sahifalar</h6>
-                    <ul class="list-unstyled small text-white-50 d-flex flex-column gap-2">
-                        <li><a href="#" class="text-white-50 text-decoration-none" onclick="navigateTo('home'); return false;">Bosh sahifa</a></li>
-                        <li><a href="#" class="text-white-50 text-decoration-none" onclick="navigateTo('programs'); return false;">Dasturlar</a></li>
-                        <li><a href="#" class="text-white-50 text-decoration-none" onclick="navigateTo('trainers'); return false;">Murabbiylar</a></li>
-                        <li><a href="#" class="text-white-50 text-decoration-none" onclick="navigateTo('blog'); return false;">Blog</a></li>
+
+                <div class="col-lg-2 col-6">
+                    <h6 class="fw-bold mb-3">Sahifalar</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-2 small">
+                        <li><a href="#" class="text-decoration-none text-muted" onclick="switchPage('home')">Bosh sahifa</a></li>
+                        <li><a href="#" class="text-decoration-none text-muted" onclick="switchPage('programs')">Dasturlar</a></li>
+                        <li><a href="#" class="text-decoration-none text-muted" onclick="switchPage('trainers')">Murabbiylar</a></li>
+                        <li><a href="#" class="text-decoration-none text-muted" onclick="switchPage('blog')">Blog</a></li>
                     </ul>
                 </div>
-                <div class="col-6 col-lg-2">
-                    <h6 class="fw-bold mb-3 text-white">Yo'nalishlar</h6>
-                    <ul class="list-unstyled small text-white-50 d-flex flex-column gap-2">
-                        <li>Kardio Mashqlar</li>
-                        <li>Kuch Mashqlari</li>
-                        <li>Yoga va Meditatsiya</li>
-                        <li>AI Taomnoma</li>
+
+                <div class="col-lg-2 col-6">
+                    <h6 class="fw-bold mb-3">Yo'nalishlar</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-2 small text-muted">
+                        <li>Kardio mashqlar</li>
+                        <li>Kuch ishlatish</li>
+                        <li>Yoga & Pilates</li>
+                        <li>To'g'ri dietologiya</li>
                     </ul>
                 </div>
+
                 <div class="col-lg-4">
-                    <h6 class="fw-bold mb-3 text-white">Biz Bilan Bog'laning</h6>
-                    <p class="text-white-50 small">Toshkent sh., Chilonzor tumani, Bunyodkor ko'chasi 15-uy</p>
-                    <p class="text-white-50 small mb-0"><i class="bi bi-telephone me-2"></i> +998 (71) 200-00-22</p>
+                    <h6 class="fw-bold mb-3">Mobil Ilovani Yuklab Oling</h6>
+                    <p class="text-muted small">FitLife ilovasi orqali mashg'ulotlaringizni har kuni qulay kuzatib boring.</p>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-dark btn-sm rounded-12 px-3 py-2 d-flex align-items-center gap-2">
+                            <i class="bi bi-apple fs-4"></i>
+                            <div class="text-start leading-tight">
+                                <small style="font-size: 0.65rem;">App Store'dan</small>
+                                <div class="fw-bold">Yuklab olish</div>
+                            </div>
+                        </button>
+                        <button class="btn btn-dark btn-sm rounded-12 px-3 py-2 d-flex align-items-center gap-2">
+                            <i class="bi bi-google-play fs-4"></i>
+                            <div class="text-start leading-tight">
+                                <small style="font-size: 0.65rem;">Google Play'dan</small>
+                                <div class="fw-bold">Yuklab olish</div>
+                            </div>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="border-top border-secondary pt-3 text-center text-white-50 small">
-                © 2026 FitLife Startup Platformasi. Barcha huquqlar himoyalangan.
+
+            <div class="text-center pt-4 mt-4 border-top text-muted small">
+                © 2026 FitLife Startup. Barcha huquqlar hamkorlikda himoyalangan.
             </div>
         </div>
     </footer>
 
-    <!-- MODALS -->
 
-    <!-- 1. Search Modal -->
-    <div class="modal fade" id="searchModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-20 glass-card p-2 border-0">
-                <div class="modal-body">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-text bg-transparent border-0"><i class="bi bi-search fs-4 text-primary"></i></span>
-                        <input type="text" class="form-control bg-transparent border-0 shadow-none fs-5" placeholder="Qidirmoqchi bo'lgan so'zni yozing...">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- MODALS & TOASTS -->
 
-    <!-- 2. Auth Modal (Login / Register) -->
-    <div class="modal fade" id="authModal" tabindex="-1">
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-20 glass-card p-4 border-0">
-                <div class="modal-header border-0 pb-0">
-                    <ul class="nav nav-pills w-100" id="authTabs">
-                        <li class="nav-item w-50">
-                            <button class="nav-link active w-100 rounded-pill" data-bs-toggle="pill" data-bs-target="#loginTab">Kirish</button>
-                        </li>
-                        <li class="nav-item w-50">
-                            <button class="nav-link w-100 rounded-pill" data-bs-toggle="pill" data-bs-target="#regTab">Ro'yxatdan O'tish</button>
-                        </li>
-                    </ul>
+            <div class="modal-content glass-card border-0 p-3">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fw-bold text-gradient">FitLife Tizimiga Kirish</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body pt-4">
-                    <div class="tab-content">
-                        <!-- Login Form -->
-                        <div class="tab-pane fade show active" id="loginTab">
-                            <form onsubmit="handleAuth(event, 'Kirish muvaffaqiyatli!')">
-                                <div class="mb-3">
-                                    <label class="form-label small fw-semibold">Telefon yoki Email</label>
-                                    <input type="text" class="form-control rounded-pill" required placeholder="+998 90 123 45 67">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label small fw-semibold">Parol</label>
-                                    <input type="password" class="form-control rounded-pill" required placeholder="******">
-                                </div>
-                                <button type="submit" class="btn btn-gradient w-100 mb-2">Kirish</button>
-                            </form>
+                <div class="modal-body">
+                    <form onsubmit="handleLogin(event)">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control rounded-16" id="loginEmail" placeholder="Email" required>
+                            <label for="loginEmail">Email Manzilingiz</label>
                         </div>
-                        <!-- Register Form -->
-                        <div class="tab-pane fade" id="regTab">
-                            <form onsubmit="handleAuth(event, 'Ro\'yxatdan o\'tildi!')">
-                                <div class="mb-3">
-                                    <label class="form-label small fw-semibold">Ism va Familiya</label>
-                                    <input type="text" class="form-control rounded-pill" required placeholder="Aziz Rahimov">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label small fw-semibold">Telefon</label>
-                                    <input type="tel" class="form-control rounded-pill" required placeholder="+998 90 123 45 67">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label small fw-semibold">Parol O'ylab Toping</label>
-                                    <input type="password" class="form-control rounded-pill" required placeholder="******">
-                                </div>
-                                <button type="submit" class="btn btn-gradient w-100 mb-2">Hisob Yaratish</button>
-                            </form>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control rounded-16" id="loginPass" placeholder="Parol" required>
+                            <label for="loginPass">Parol</label>
                         </div>
+                        <button type="submit" class="btn btn-gradient w-100 py-3 mb-3">Kirish</button>
+                    </form>
+                    <div class="text-center">
+                        <small class="text-muted">Hali a'zo emasmisiz? <a href="#" class="text-primary fw-bold">Ro'yxatdan o'tish</a></small>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 3. Program Modal -->
+    <!-- Program Details Modal -->
     <div class="modal fade" id="programModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-20 glass-card p-4 border-0">
+            <div class="modal-content glass-card border-0 p-3">
                 <div class="modal-header border-0">
-                    <h5 class="fw-bold modal-title" id="pModalTitle">Dastur Nomi</h5>
+                    <h5 class="modal-title fw-bold text-gradient" id="modalProgTitle">Dastur Nomi</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <p id="pModalDesc" class="text-muted"></p>
-                    <div class="bg-light p-3 rounded-20 mb-3">
-                        <h6 class="fw-bold mb-2">Dastur rejasiga kiradi:</h6>
-                        <ul class="small text-muted mb-0 ps-3">
-                            <li>Xaftasiga 4 marotaba intensiv mashqlar</li>
-                            <li>Shaxsiy kaloriya hisoblagich ratsioni</li>
-                            <li>Murabbiy bilan 24/7 savol-javob chat</li>
-                        </ul>
+                    <div class="d-flex gap-3 mb-3">
+                        <span class="badge bg-primary rounded-pill" id="modalProgDuration">4 Hafta</span>
+                        <span class="badge bg-success rounded-pill" id="modalProgCount">12 ta dars</span>
                     </div>
-                    <button class="btn btn-gradient w-100" onclick="handleAuth(event, 'Dasturga muvaffaqiyatli yozildingiz!')">Dasturga Qatnashish</button>
+                    <p class="text-muted">Ushbu dastur sizning maqsadlaringizga muvofiq ravishda mutaxassislarimiz tomonidan maxsus ishlab chiqilgan.</p>
+                    <h6 class="fw-bold mt-4">Murabbiy: <span id="modalProgTrainer" class="text-primary">--</span></h6>
+                    
+                    <div class="mt-4 p-3 bg-light rounded-16">
+                        <h6 class="fw-bold mb-2">A'zo bo'lish formasi</h6>
+                        <input type="text" class="form-control mb-2 rounded-12" placeholder="Ismingiz">
+                        <input type="tel" class="form-control mb-3 rounded-12" placeholder="Telefon raqamingiz">
+                        <button class="btn btn-gradient w-100" onclick="submitEnrollment()">Yozilishni Tasdiqlash</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 4. Trainer Modal -->
+    <!-- Trainer Modal -->
     <div class="modal fade" id="trainerModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-20 glass-card p-4 border-0">
+            <div class="modal-content glass-card border-0 p-3">
                 <div class="modal-header border-0">
-                    <h5 class="fw-bold modal-title" id="tModalTitle">Murabbiy Bilan Mashg'ulot</h5>
+                    <h5 class="modal-title fw-bold text-gradient" id="modalTrainerName">Murabbiy</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <p id="tModalInfo" class="text-primary fw-medium small mb-3"></p>
-                    <form onsubmit="handleAuth(event, 'Murabbiyga muvaffaqiyatli yozildingiz!')">
-                        <div class="mb-3">
-                            <label class="form-label small fw-semibold">Qulay Kunni Tanlang</label>
-                            <input type="date" class="form-control rounded-pill" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small fw-semibold">Mashg'ulot Vaqti</label>
-                            <select class="form-select rounded-pill">
-                                <option>10:00 - 11:30</option>
-                                <option>15:00 - 16:30</option>
-                                <option>18:00 - 19:30</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-gradient w-100">Tasdiqlash</button>
-                    </form>
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="badge badge-soft" id="modalTrainerSpec">Mutaxassislik</div>
+                        <div class="text-warning"><i class="bi bi-star-fill"></i> <span id="modalTrainerRating">5.0</span></div>
+                    </div>
+                    <p class="text-muted small">Individual mashg'ulotlar uchun bo'sh vaqt oralig'ini tanlang va band qiling.</p>
+                    
+                    <label class="form-label fw-bold mt-2">Mashg'ulot kunini tanlang:</label>
+                    <select class="form-select rounded-12 mb-3">
+                        <option>Ertaga (10:00 - 11:30)</option>
+                        <option>Ertaga (15:00 - 16:30)</option>
+                        <option>Indinga (11:00 - 12:30)</option>
+                    </select>
+
+                    <button class="btn btn-gradient w-100 py-2" onclick="confirmBooking()">Vaqtni Band Qilish</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Toast Notification Container -->
-    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
-        <div id="liveToast" class="toast align-items-center text-white bg-success border-0 rounded-20" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body fw-semibold" id="toastMessage">
-                    Muvaffaqiyatli amalga oshirildi!
+    <!-- Blog Detail Modal -->
+    <div class="modal fade" id="blogModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content glass-card border-0 p-3">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fw-bold text-gradient" id="modalBlogTitle">Maqola Nomi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                <div class="modal-body">
+                    <p class="text-muted fs-6">Sog'lom turmush tarzi nafaqat mashq qilish, balki to'g'ri rejim va uyqu intizomiga rioya etish demakdir. Har kuni yetarlicha suv ichish va muvozanatli ovqatlanish orqali siz energiya darajangizni bir necha baravar oshirishingiz mumkin.</p>
+                    
+                    <hr class="my-4">
+                    <h6 class="fw-bold mb-3">Izohlar (2)</h6>
+                    <div class="bg-light p-3 rounded-16 mb-2">
+                        <strong class="d-block text-dark">Otabek Valiyev</strong>
+                        <small class="text-muted">Juda ham foydali maqola bo'libdi, rahmat!</small>
+                    </div>
+                    <div class="input-group mt-3">
+                        <input type="text" class="form-control rounded-start-pill" placeholder="Izoh qoldiring...">
+                        <button class="btn btn-gradient rounded-end-pill px-4" onclick="showToast('Izohingiz qo\'shildi!')">Yuborish</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap 5.3 JavaScript Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/bootstrap.bundle.min.js"></script>
-    <script src="./script.js"></script>
+    <!-- Bootstrap Toast Container -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
+        <div id="liveToast" class="toast glass-card border-0" role="alert">
+            <div class="toast-header bg-gradient-custom text-white border-0 rounded-top-4">
+                <i class="bi bi-check-circle-fill me-2"></i>
+                <strong class="me-auto">FitLife Bildirishnoma</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body fw-medium" id="toastMessage">
+                Muvaffaqiyatli bajarildi!
+            </div>
+        </div>
+    </div>
 
+
+    <!-- Bootstrap 5.3 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./script.js"></script>
 </body>
 </html>

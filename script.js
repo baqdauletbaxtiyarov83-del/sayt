@@ -1,87 +1,64 @@
-﻿/**
-         * Page Navigation Function (SPA architecture)
-         * Solves ReferenceError: navigateTo is not defined
-         */
-        function navigateTo(pageId) {
+﻿// PAGE SWITCHING FUNCTIONALITY (SPA Client-side Routing)
+        function switchPage(pageId) {
             // Hide all pages
             const pages = document.querySelectorAll('.page-section');
-            pages.forEach(page => {
-                page.classList.remove('active-page');
-            });
+            pages.forEach(page => page.classList.remove('active'));
 
-            // Show selected page
+            // Show targeted page
             const targetPage = document.getElementById('page-' + pageId);
             if (targetPage) {
-                targetPage.classList.add('active-page');
+                targetPage.classList.add('active');
             }
 
-            // Update Nav Active State
-            const navLinks = document.querySelectorAll('.nav-btn');
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-            });
+            // Update active state in Navigation Links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active-nav'));
 
             const activeNav = document.getElementById('nav-' + pageId);
             if (activeNav) {
-                activeNav.classList.add('active');
+                activeNav.classList.add('active-nav');
             }
 
             // Scroll to top smooth
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        /**
-         * Close Mobile Offcanvas Menu
-         */
-        function closeOffcanvas() {
-            const offcanvasEl = document.getElementById('mobileMenu');
-            const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
-            if (bsOffcanvas) {
-                bsOffcanvas.hide();
+        // PRICE TOGGLE (Monthly / Yearly)
+        function togglePricing() {
+            const isYearly = document.getElementById('pricingToggle').checked;
+            const priceElements = document.querySelectorAll('.price-amount');
+
+            priceElements.forEach(el => {
+                const monthly = el.getAttribute('data-monthly');
+                const yearly = el.getAttribute('data-yearly');
+                el.textContent = isYearly ? yearly : monthly;
+            });
+        }
+
+        // GLOBAL SEARCH BAR FILTER
+        function handleGlobalSearch(event) {
+            const query = event.target.value.toLowerCase();
+            if (query.trim() === '') return;
+
+            if (event.key === 'Enter') {
+                switchPage('programs');
+                const cards = document.querySelectorAll('.program-card-item');
+                cards.forEach(card => {
+                    const title = card.querySelector('h5').textContent.toLowerCase();
+                    if (title.includes(query)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
             }
         }
 
-        /**
-         * Switch Language (UZ/RU state switcher)
-         */
-        function switchLang(lang) {
-            document.getElementById('currentLang').innerText = lang;
-            showToast(lang === 'UZ' ? 'Til Uzbekchaga o\'zgartirildi' : 'Язык изменен на Русский');
-        }
-
-        /**
-         * Pricing Monthly / Yearly Toggle
-         */
-        function togglePricing() {
-            const isYearly = document.getElementById('pricingToggle').checked;
-            const priceValList = document.querySelectorAll('.price-val');
-            const periodValList = document.querySelectorAll('.period-val');
-
-            priceValList.forEach(el => {
-                el.innerText = isYearly ? el.getAttribute('data-yearly') : el.getAttribute('data-monthly');
-            });
-
-            periodValList.forEach(el => {
-                el.innerText = isYearly ? 'yil' : 'oy';
-            });
-        }
-
-        /**
-         * Program Filtering Logic
-         */
-        function filterPrograms() {
-            const searchVal = document.getElementById('programSearch').value.toLowerCase();
-            const diffVal = document.getElementById('diffSelect').value;
-            const programCards = document.querySelectorAll('.program-card');
-
-            programCards.forEach(card => {
-                const title = card.querySelector('h5').innerText.toLowerCase();
-                const diff = card.getAttribute('data-diff');
-
-                const matchesSearch = title.includes(searchVal);
-                const matchesDiff = (diffVal === 'all' || diff === diffVal);
-
-                if (matchesSearch && matchesDiff) {
+        // PROGRAM CATEGORY FILTERING
+        function filterProgramCategory(category) {
+            const cards = document.querySelectorAll('.program-card-item');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
                     card.style.display = 'block';
                 } else {
                     card.style.display = 'none';
@@ -89,73 +66,95 @@
             });
         }
 
-        /**
-         * Toast Notification Display
-         */
+        // PROGRAM DIFFICULTY FILTERING
+        function filterProgramCards() {
+            const level = document.getElementById('difficultyFilter').value;
+            const cards = document.querySelectorAll('.program-card-item');
+            cards.forEach(card => {
+                if (level === 'all' || card.getAttribute('data-level') === level) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function filterPrograms(cat) {
+            switchPage('programs');
+            filterProgramCategory(cat);
+        }
+
+        // MODAL OPENERS & HANDLERS
+        function openProgramModal(title, duration, count, trainer) {
+            document.getElementById('modalProgTitle').textContent = title;
+            document.getElementById('modalProgDuration').textContent = duration;
+            document.getElementById('modalProgCount').textContent = count;
+            document.getElementById('modalProgTrainer').textContent = trainer;
+
+            const modal = new bootstrap.Modal(document.getElementById('programModal'));
+            modal.show();
+        }
+
+        function submitEnrollment() {
+            const modalEl = document.getElementById('programModal');
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            if (modal) modal.hide();
+            showToast('Dasturga muvaffaqiyatli a\'zo bo\'ldingiz!');
+        }
+
+        function openTrainerModal(name, spec, exp, rating) {
+            document.getElementById('modalTrainerName').textContent = name;
+            document.getElementById('modalTrainerSpec').textContent = spec + ' (' + exp + ')';
+            document.getElementById('modalTrainerRating').textContent = rating;
+
+            const modal = new bootstrap.Modal(document.getElementById('trainerModal'));
+            modal.show();
+        }
+
+        function confirmBooking() {
+            const modalEl = document.getElementById('trainerModal');
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            if (modal) modal.hide();
+            showToast('Murabbiy qabuliga mufaqqiyatli yozildingiz!');
+        }
+
+        function openBlogModal(title) {
+            document.getElementById('modalBlogTitle').textContent = title;
+            const modal = new bootstrap.Modal(document.getElementById('blogModal'));
+            modal.show();
+        }
+
+        // NEWSLETTER & CONTACT FORM HANDLERS
+        function handleNewsletter(e) {
+            e.preventDefault();
+            showToast('Azo bo\'lganingiz uchun rahmat!');
+            e.target.reset();
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            showToast('Xabaringiz qabul qilindi. Tez orada bog\'lanamiz!');
+            e.target.reset();
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const modalEl = document.getElementById('loginModal');
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            if (modal) modal.hide();
+            showToast('Tizimga muvaffaqiyatli kirdingiz!');
+        }
+
+        // LANGUAGE SWITCHER
+        function changeLang(lang) {
+            document.getElementById('langBtn').innerHTML = (lang === 'UZ' ? '🇺🇿 UZ' : '🇷🇺 RU');
+            showToast('Til almashtirildi: ' + lang);
+        }
+
+        // TOAST DISPLAY HELPER
         function showToast(message) {
-            document.getElementById('toastMessage').innerText = message;
+            document.getElementById('toastMessage').textContent = message;
             const toastEl = document.getElementById('liveToast');
             const toast = new bootstrap.Toast(toastEl);
             toast.show();
-        }
-
-        /**
-         * Newsletter Form Handler
-         */
-        function handleNewsletter(event) {
-            event.preventDefault();
-            showToast('Obuna muvaffaqiyatli yakunlandi!');
-            event.target.reset();
-        }
-
-        /**
-         * Contact Form Handler
-         */
-        function handleContactSubmit(event) {
-            event.preventDefault();
-            showToast('Xabaringiz qabul qilindi. Tez orada bog\'lanamiz!');
-            event.target.reset();
-        }
-
-        /**
-         * Authentication Modal Form Handler
-         */
-        function handleAuth(event, msg) {
-            event.preventDefault();
-            
-            // Close any open modal
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(m => {
-                const modalInstance = bootstrap.Modal.getInstance(m);
-                if (modalInstance) modalInstance.hide();
-            });
-
-            showToast(msg);
-        }
-
-        /**
-         * Open Program Details Modal
-         */
-        function openProgramModal(title, desc) {
-            document.getElementById('pModalTitle').innerText = title;
-            document.getElementById('pModalDesc').innerText = desc;
-            const programModal = new bootstrap.Modal(document.getElementById('programModal'));
-            programModal.show();
-        }
-
-        /**
-         * Open Trainer Booking Modal
-         */
-        function openTrainerModal(name, role, exp) {
-            document.getElementById('tModalTitle').innerText = name + ' bilan mashg\'ulot';
-            document.getElementById('tModalInfo').innerText = role + ' • ' + exp;
-            const trainerModal = new bootstrap.Modal(document.getElementById('trainerModal'));
-            trainerModal.show();
-        }
-
-        /**
-         * Open Blog Details Modal
-         */
-        function openBlogModal(title) {
-            showToast('"' + title + '" maqolasi yuklanmoqda...');
         }
